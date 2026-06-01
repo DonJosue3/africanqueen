@@ -45,12 +45,19 @@ body{
 .bg-slide {
     position: absolute;
     inset: 0;
+
     background-size: cover;
     background-position: center;
-    transform: scale(1.1);
-    filter: blur(20px);
+
+    transform: scale(1.05);
+    filter: blur(10px);
+
     opacity: 0;
-    transition: opacity 0.4s linear; 
+
+    transition: opacity 0.8s ease;
+
+    will-change: opacity, transform;
+    backface-visibility: hidden;
 }
 
 /* Couche sombre globale */
@@ -86,10 +93,16 @@ body{
 .inner-slide {
     position: absolute;
     inset: 0;
+
     background-size: cover;
     background-position: center;
+
     opacity: 0;
-    transition: opacity 0.4s linear;
+
+    transition: opacity 0.8s ease;
+
+    will-change: opacity;
+    backface-visibility: hidden;
 }
 
 /* États actifs */
@@ -108,7 +121,7 @@ body{
 /* ================= HEADER BAR (LOGO + NAV) ================= */
 .header-bar {
     position: absolute;
-    top: 40px;
+    top: 0;
     left: 0;
     right: 0;
     padding: 0 60px;
@@ -119,13 +132,17 @@ body{
 }
 
 /* Style Écriture Logo (Playfair Display - Prestige Royal) */
-.logo {
-    font-family: 'Playfair Display', serif;
-    color: white;
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    width:180px;
+    height:auto;
+    object-fit:contain;
+    display:block;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
 }
 
 /* Style de la Navigation (Poppins - Moderne & Épurée) */
@@ -143,16 +160,43 @@ body{
 }
 
 .main-nav-container a:hover {
+    color: rgb(255, 234, 0);
     opacity: 1;
 }
 
 /* ================= TEXTE CENTRAL ET DYNAMIQUE ================= */
 .content{
-    position:relative;
+    position:absolute;
+
+    bottom:60px;
+
     z-index:3;
+
     color:white;
-    padding: 0 40px 60px 60px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+
+    width:600px;
+
+    text-shadow:0 2px 4px rgba(0,0,0,0.6);
+
+    transition:
+        left 0.8s ease,
+        right 0.8s ease;
+}
+
+/* POSITION LEFT */
+
+.content.left{
+    left:60px;
+    right:auto;
+    text-align:left;
+}
+
+/* POSITION RIGHT */
+
+.content.right{
+    right:60px;
+    left:auto;
+    text-align:right;
 }
 
 .content h1{
@@ -163,6 +207,7 @@ body{
     font-style: italic; 
     margin-bottom: 15px;
     line-height: 1.1;
+    will-change: transform,opacity;
 }
 
 .content p {
@@ -173,6 +218,8 @@ body{
     line-height: 1.8;
     opacity: 0.85;
     letter-spacing: 0.5px;
+    will-change: transform,opacity;
+
 }
 
 /* ==================================================
@@ -213,10 +260,225 @@ body{
 
     .content h1 {
         font-size: 2.4rem;
+        transition: all 0.6s ease;
     }
 
     .content p {
         font-size: 0.95rem;
+        transition: all 0.6s ease;
+    }
+}
+/* =========================
+   TEXT ANIMATIONS
+========================= */
+
+.content h1,
+.content p{
+    opacity:0;
+}
+
+/* FROM LEFT */
+.animate-left h1,
+.animate-left p{
+    animation:fromLeft 1s ease forwards;
+}
+
+.animate-left p{
+    animation-delay:0.2s;
+}
+
+/* FROM RIGHT */
+.animate-right h1,
+.animate-right p{
+    animation:fromRight 1s ease forwards;
+}
+
+.animate-right p{
+    animation-delay:0.2s;
+}
+
+/* FROM BOTTOM RIGHT */
+.animate-bottom-right h1,
+.animate-bottom-right p{
+    animation:fromBottomRight 1s ease forwards;
+}
+
+.animate-bottom-right p{
+    animation-delay:0.2s;
+}
+
+/* FROM BOTTOM LEFT */
+.animate-bottom-left h1,
+.animate-bottom-left p{
+    animation:fromBottomLeft 1s ease forwards;
+}
+
+.animate-bottom-left p{
+    animation-delay:0.2s;
+}
+
+/* KEYFRAMES */
+
+@keyframes fromLeft{
+    from{
+        opacity:0;
+        transform:translateX(-120px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes fromRight{
+    from{
+        opacity:0;
+        transform:translateX(120px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes fromBottomRight{
+    from{
+        opacity:0;
+        transform:
+            translate(120px,120px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translate(0,0);
+    }
+}
+
+@keyframes fromBottomLeft{
+    from{
+        opacity:0;
+        transform:
+            translate(-120px,120px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translate(0,0);
+    }
+}
+/* =========================
+   ANIMATION TEXT
+========================= */
+
+.content h1,
+.content p{
+    opacity:0;
+}
+
+/* LEFT SIDE */
+
+.animate-left h1,
+.animate-left p{
+    animation:slideFromLeft 1s ease forwards;
+}
+
+.animate-left p{
+    animation-delay:0.2s;
+}
+
+/* RIGHT SIDE */
+
+.animate-right h1,
+.animate-right p{
+    animation:slideFromRight 1s ease forwards;
+}
+
+.animate-right p{
+    animation-delay:0.2s;
+}
+
+/* KEYFRAMES */
+
+@keyframes slideFromLeft{
+
+    from{
+        opacity:0;
+        transform:translateX(-120px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes slideFromRight{
+
+    from{
+        opacity:0;
+        transform:translateX(120px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+/* =========================
+   BOTTOM ANIMATIONS
+========================= */
+
+.animate-bottom-right h1,
+.animate-bottom-right p{
+    animation:bottomRightUp 1s ease forwards;
+}
+
+.animate-bottom-right p{
+    animation-delay:0.2s;
+}
+
+.animate-bottom-left h1,
+.animate-bottom-left p{
+    animation:bottomLeftUp 1s ease forwards;
+}
+
+.animate-bottom-left p{
+    animation-delay:0.2s;
+}
+
+/* KEYFRAMES */
+
+@keyframes bottomRightUp{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(120px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes bottomLeftUp{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(120px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
     }
 }
 </style>
@@ -236,12 +498,14 @@ body{
         
         <!-- Barre d'en-tête (Logo en haut à gauche, Nav à droite) -->
         <div class="header-bar">
-            <div class="logo">African Queen Empire</div>
+            <div class="logo">
+                <img src="logo.png" alt="African Queen Empire Logo">
+            </div>
             
             <div class="main-nav-container">
                 <a href="#">Services</a>
                 <a href="#">Shop</a>
-                <a href="#">About</a>
+                <a href="#">About Us</a>
                 <a href="#">Contact</a>
             </div>
         </div>
@@ -250,7 +514,7 @@ body{
         <div class="inner-slider" id="innerSlider"></div>
 
         <!-- Texte dynamique -->
-        <div class="content">
+        <div class="content right animate-right" id="animatedContent">
             <h1 id="sliderTitle">African Queen</h1>
             <p id="sliderText">Handmade Creativity</p>
         </div>
@@ -259,25 +523,24 @@ body{
 </section>
 
 <script>
-// Structure de données contenant les visuels en ligne (libres de droits et optimisés) et les textes associés
 const slidesData = [
     {
-        image: "https://images.unsplash.com/photo-1532375811408-1b694b90f69f?q=80&w=1000&auto=format&fit=crop",
+        image: "https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=1600",
         title: "Handmade Creativity",
         text: "Unique African crafts made with passion and precision."
     },
     {
-        image: "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=1000&auto=format&fit=crop",
+        image: "https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1600",
         title: "Interior Decoration",
         text: "Bring warmth and African elegance into your living spaces."
     },
     {
-        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1000&auto=format&fit=crop",
+        image: "https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1600",
         title: "Café Lifestyle",
         text: "Relax and enjoy an authentic cultural coffee experience."
     },
     {
-        image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000&auto=format&fit=crop",
+        image: "https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1600",
         title: "Fashion Products",
         text: "Bold designs and premium African textiles just for you."
     }
@@ -288,42 +551,194 @@ const innerSlider = document.getElementById("innerSlider");
 const sliderTitle = document.getElementById("sliderTitle");
 const sliderText = document.getElementById("sliderText");
 
-// Génération des couches d'images superposées
-slidesData.forEach((slide, i) => {
-    const bgDiv = document.createElement("div");
-    bgDiv.className = `bg-slide ${i === 0 ? 'active' : ''}`;
-    bgDiv.style.backgroundImage = `url('${slide.image}')`;
-    bgSlider.appendChild(bgDiv);
-
-    const innerDiv = document.createElement("div");
-    innerDiv.className = `inner-slide ${i === 0 ? 'active' : ''}`;
-    innerDiv.style.backgroundImage = `url('${slide.image}')`;
-    innerSlider.appendChild(innerDiv);
-});
-
 let currentIndex = 0;
-const bgSlidesElements = document.querySelectorAll(".bg-slide");
-const innerSlidesElements = document.querySelectorAll(".inner-slide");
 
-function nextSlide() {
-    bgSlidesElements[currentIndex].classList.remove("active");
-    innerSlidesElements[currentIndex].classList.remove("active");
+const bgSlidesElements = [];
+const innerSlidesElements = [];
 
-    currentIndex = (currentIndex + 1) % slidesData.length;
+/* =========================
+   PRELOAD DES IMAGES
+========================= */
 
-    bgSlidesElements[currentIndex].classList.add("active");
-    innerSlidesElements[currentIndex].classList.add("active");
+function preloadImages() {
 
-    sliderTitle.textContent = slidesData[currentIndex].title;
-    sliderText.textContent = slidesData[currentIndex].text;
+    let loaded = 0;
+
+    slidesData.forEach((slide, i) => {
+
+        const img = new Image();
+
+        img.src = slide.image;
+
+        img.onload = () => {
+
+            loaded++;
+
+            if (loaded === slidesData.length) {
+                createSlides();
+                startSlider();
+            }
+        };
+    });
 }
 
-// Initialisation du premier texte
-sliderTitle.textContent = slidesData[0].title;
-sliderText.textContent = slidesData[0].text;
+/* =========================
+   CREATION DES SLIDES
+========================= */
 
-// Fréquence d'affichage réglée sur 1000ms (1 seconde)
-setInterval(nextSlide, 2000);
+function createSlides() {
+
+    slidesData.forEach((slide, i) => {
+
+        const bgDiv = document.createElement("div");
+
+        bgDiv.className = "bg-slide";
+
+        if(i === 0){
+            bgDiv.classList.add("active");
+        }
+
+        bgDiv.style.backgroundImage = `url('${slide.image}')`;
+
+        bgSlider.appendChild(bgDiv);
+
+        bgSlidesElements.push(bgDiv);
+
+        const innerDiv = document.createElement("div");
+
+        innerDiv.className = "inner-slide";
+
+        if(i === 0){
+            innerDiv.classList.add("active");
+        }
+
+        innerDiv.style.backgroundImage = `url('${slide.image}')`;
+
+        innerSlider.appendChild(innerDiv);
+
+        innerSlidesElements.push(innerDiv);
+    });
+
+    sliderTitle.textContent = slidesData[0].title;
+    sliderText.textContent = slidesData[0].text;
+}
+
+/* =========================
+   CHANGEMENT DES SLIDES
+========================= */
+
+const animatedContent =
+document.getElementById("animatedContent");
+
+function nextSlide() {
+
+    bgSlidesElements[currentIndex]
+    .classList.remove("active");
+
+    innerSlidesElements[currentIndex]
+    .classList.remove("active");
+
+    currentIndex =
+    (currentIndex + 1) % slidesData.length;
+
+    bgSlidesElements[currentIndex]
+    .classList.add("active");
+
+    innerSlidesElements[currentIndex]
+    .classList.add("active");
+
+    sliderTitle.textContent =
+    slidesData[currentIndex].title;
+
+    sliderText.textContent =
+    slidesData[currentIndex].text;
+
+    /* RESET */
+
+    animatedContent.classList.remove(
+    "left",
+    "right",
+    "animate-left",
+    "animate-right",
+    "animate-bottom-right",
+    "animate-bottom-left"
+);
+
+    void animatedContent.offsetWidth;
+
+    /* SLIDE 1 */
+if(currentIndex === 0){
+
+    animatedContent.classList.add(
+        "right",
+        "animate-right"
+    );
+}
+
+/* SLIDE 2 */
+else if(currentIndex === 1){
+
+    animatedContent.classList.add(
+        "left",
+        "animate-left"
+    );
+}
+
+/* SLIDE 3 */
+else if(currentIndex === 2){
+
+    animatedContent.classList.add(
+        "right",
+        "animate-bottom-right"
+    );
+}
+
+/* SLIDE 4 */
+else{
+
+    animatedContent.classList.add(
+        "left",
+        "animate-bottom-left"
+    );
+}
+}
+
+/* =========================
+   ANIMATION TEXTE
+========================= */
+
+function animateText(){
+
+    sliderTitle.style.opacity = "0";
+    sliderText.style.opacity = "0";
+
+    sliderTitle.style.transform = "translateY(20px)";
+    sliderText.style.transform = "translateY(20px)";
+
+    setTimeout(() => {
+
+        sliderTitle.style.transition = "all 0.6s ease";
+        sliderText.style.transition = "all 0.6s ease";
+
+        sliderTitle.style.opacity = "1";
+        sliderText.style.opacity = "1";
+
+        sliderTitle.style.transform = "translateY(0)";
+        sliderText.style.transform = "translateY(0)";
+
+    }, 100);
+}
+
+/* =========================
+   DEMARRAGE
+========================= */
+
+function startSlider(){
+
+    setInterval(nextSlide, 5000);
+}
+
+preloadImages();
 </script>
 
 </body>
