@@ -20,7 +20,7 @@
 body{
     /* Application de la police épurée Poppins par défaut */
     font-family: 'Poppins', sans-serif;
-    overflow:hidden;
+    overflow-x:hidden;
     background-color: #000;
 }
 
@@ -481,6 +481,174 @@ body{
             translateY(0);
     }
 }
+/* ===================================
+   SERVICES SECTION
+=================================== */
+
+.services-section{
+
+    position:relative;
+
+    background:#050505;
+
+    padding:140px 5vw;
+
+    color:white;
+}
+
+/* HEADER */
+
+.services-header{
+
+    text-align:center;
+
+    margin-bottom:80px;
+}
+
+.services-header span{
+
+    color:#c8a96b;
+
+    text-transform:uppercase;
+
+    letter-spacing:4px;
+
+    font-size:0.9rem;
+}
+
+.services-header h2{
+
+    font-family:'Playfair Display', serif;
+
+    font-size:4rem;
+
+    font-style:italic;
+
+    font-weight:400;
+
+    margin-top:20px;
+}
+
+/* GRID */
+
+.services-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+}
+
+/* CARD */
+
+.service-card{
+
+    position:relative;
+
+    height:500px;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    background:#111;
+}
+
+/* IMAGE */
+
+.service-card img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:
+    transform 1s ease,
+    filter 1s ease;
+}
+
+/* OVERLAY */
+
+.service-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.92),
+        rgba(0,0,0,0.15)
+    );
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:40px;
+
+    transition:0.5s ease;
+}
+
+.service-overlay h3{
+
+    font-family:'Playfair Display', serif;
+
+    font-size:2rem;
+
+    font-style:italic;
+
+    margin-bottom:15px;
+}
+
+.service-overlay p{
+
+    opacity:0.8;
+
+    line-height:1.8;
+}
+
+/* HOVER EFFECT */
+
+.service-card:hover img{
+
+    transform:scale(1.08);
+
+    filter:brightness(1.1);
+}
+
+.service-card:hover .service-overlay{
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.97),
+        rgba(0,0,0,0.05)
+    );
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .services-header h2{
+
+        font-size:2.5rem;
+    }
+
+    .service-card{
+
+        height:420px;
+    }
+}
 </style>
 </head>
 <body>
@@ -515,13 +683,60 @@ body{
 
         <!-- Texte dynamique -->
         <div class="content right animate-right" id="animatedContent">
-            <h1 id="sliderTitle">African Queen</h1>
-            <p id="sliderText">Handmade Creativity</p>
+            <h1 id="sliderTitle"></h1>
+            <p id="sliderText"></p>
         </div>
     </div>
 
 </section>
+<section class="services-section">
 
+    <div class="services-header">
+        <span>What We Create</span>
+        <h2>Our Services</h2>
+    </div>
+
+    <div class="services-grid">
+
+        <div class="service-card">
+            <img src="https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=1200">
+
+            <div class="service-overlay">
+                <h3>Handmade Creativity</h3>
+                <p>Authentic African handmade creations crafted with passion.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1200">
+
+            <div class="service-overlay">
+                <h3>Interior Decoration</h3>
+                <p>Elegant spaces inspired by African warmth and culture.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1200">
+
+            <div class="service-overlay">
+                <h3>Café Lifestyle</h3>
+                <p>Immersive coffee experiences with cultural elegance.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1200">
+
+            <div class="service-overlay">
+                <h3>Fashion Products</h3>
+                <p>Premium African fashion with bold modern identity.</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
 <script>
 const slidesData = [
     {
@@ -536,13 +751,18 @@ const slidesData = [
     },
     {
         image: "https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        title: "Café Lifestyle",
+        title: "Coffee Lifestyle",
         text: "Relax and enjoy an authentic cultural coffee experience."
     },
     {
         image: "https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1600",
         title: "Fashion Products",
         text: "Bold designs and premium African textiles just for you."
+    },
+    {
+        image: "https://images.pexels.com/photos/20167933/pexels-photo-20167933.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        title: "Natural Hair Elegance",
+        text: "Discover the perfect gift with our exclusive African collection."
     }
 ];
 
@@ -735,7 +955,7 @@ function animateText(){
 
 function startSlider(){
 
-    setInterval(nextSlide, 5000);
+    setInterval(nextSlide, 4000);
 }
 
 preloadImages();
