@@ -1,965 +1,234 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>African Queen Empire</title>
-
-<!-- Importation du Style 1 (Royal & Prestige) depuis Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>African Queen Empire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; overflow-x: hidden; background-color: #000; }
 
-body{
-    /* Application de la police épurée Poppins par défaut */
-    font-family: 'Poppins', sans-serif;
-    overflow-x:hidden;
-    background-color: #000;
-}
-
-/* ================= FRONT PAGE / EN-TÊTE ================= */
-.front-page{
-    position:relative;
-    width:100%;
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-/* CONTENEURS POUR LE FLOU ARRIÈRE-PLAN */
-.bg-slider {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-}
-
-.bg-slide {
-    position: absolute;
-    inset: 0;
-
-    background-size: cover;
-    background-position: center;
-
-    transform: scale(1.05);
-    filter: blur(10px);
-
-    opacity: 0;
-
-    transition: opacity 0.8s ease;
-
-    will-change: opacity, transform;
-    backface-visibility: hidden;
-}
-
-/* Couche sombre globale */
-.overlay{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.5);
-    z-index:2;
-}
-
-/* ================= CONTENT BOX (CARTE BANNIÈRE) ================= */
-.content-box{
-    position:relative;
-    width: 96vw;
-    height: 92vh;
-    border-radius: 24px; 
-    overflow:hidden;
-    z-index:3;
-    box-shadow:0 20px 50px rgba(0,0,0,0.6);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; 
-}
-
-/* Slider interne (images nettes) */
-.inner-slider {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-}
-
-.inner-slide {
-    position: absolute;
-    inset: 0;
-
-    background-size: cover;
-    background-position: center;
-
-    opacity: 0;
-
-    transition: opacity 0.8s ease;
-
-    will-change: opacity;
-    backface-visibility: hidden;
-}
-
-/* États actifs */
+/* SLIDER BASE (SHARED BY HERO & ABOUT) */
+.front-page, .about-section { position: relative; width: 100%; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+.bg-slider, .overlay, .inner-slider { position: absolute; inset: 0; }
+.bg-slide, .inner-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease; will-change: opacity; backface-visibility: hidden; }
+.bg-slide { transform: scale(1.05); filter: blur(10px); }
 .bg-slide.active { opacity: 0.5; }
 .inner-slide.active { opacity: 1; }
-
-/* Dégradé interne pour la lisibilité du texte */
-.content-box::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%);
-    z-index:2;
-}
-
-/* ================= HEADER BAR (LOGO + NAV) ================= */
-.header-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 10;
-}
-
-/* Style Écriture Logo (Playfair Display - Prestige Royal) */
-.logo{
-    display:flex;
-    align-items:center;
-}
-
-.logo img{
-    width:180px;
-    height:auto;
-    object-fit:contain;
-    display:block;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
-}
-
-/* Style de la Navigation (Poppins - Moderne & Épurée) */
-.main-nav-container a {
-    color: white;
-    text-decoration: none;
-    margin-left: 35px;
-    font-size: 0.95rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.75;
-    transition: opacity 0.3s;
-    display: inline-block;
-}
-
-.main-nav-container a:hover {
-    color: rgb(255, 234, 0);
-    opacity: 1;
-}
-
-/* ================= TEXTE CENTRAL ET DYNAMIQUE ================= */
-.content{
-    position:absolute;
-
-    bottom:60px;
-
-    z-index:3;
-
-    color:white;
-
-    width:600px;
-
-    text-shadow:0 2px 4px rgba(0,0,0,0.6);
-
-    transition:
-        left 0.8s ease,
-        right 0.8s ease;
-}
-
-/* POSITION LEFT */
-
-.content.left{
-    left:60px;
-    right:auto;
-    text-align:left;
-}
-
-/* POSITION RIGHT */
-
-.content.right{
-    right:60px;
-    left:auto;
-    text-align:right;
-}
-
-.content h1{
-    /* Application du style signature : Playfair Display en Italique */
-    font-family: 'Playfair Display', serif;
-    font-size: 5rem;
-    font-weight: 400;
-    font-style: italic; 
-    margin-bottom: 15px;
-    line-height: 1.1;
-    will-change: transform,opacity;
-}
-
-.content p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 300;
-    max-width: 600px;
-    line-height: 1.8;
-    opacity: 0.85;
-    letter-spacing: 0.5px;
-    will-change: transform,opacity;
-
-}
-
-/* ==================================================
-   RESPONSIVE DESIGN (Adaptation Mobile & Tablette)
-   ================================================== */
-
-@media (max-width: 992px) {
-    .header-bar {
-        padding: 0 40px;
-    }
-    .content h1 {
-        font-size: 3.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .header-bar {
-        top: 25px;
-        flex-direction: column;
-        gap: 15px;
-        padding: 0 20px;
-    }
-
-    .logo {
-        font-size: 1.3rem;
-        letter-spacing: 1px;
-    }
-
-    .main-nav-container a {
-        margin: 0 10px;
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-    }
-
-    .content {
-        padding: 0 24px 40px 24px;
-    }
-
-    .content h1 {
-        font-size: 2.4rem;
-        transition: all 0.6s ease;
-    }
-
-    .content p {
-        font-size: 0.95rem;
-        transition: all 0.6s ease;
-    }
-}
-/* =========================
-   TEXT ANIMATIONS
-========================= */
-
-.content h1,
-.content p{
-    opacity:0;
-}
-
-/* FROM LEFT */
-.animate-left h1,
-.animate-left p{
-    animation:fromLeft 1s ease forwards;
-}
-
-.animate-left p{
-    animation-delay:0.2s;
-}
-
-/* FROM RIGHT */
-.animate-right h1,
-.animate-right p{
-    animation:fromRight 1s ease forwards;
-}
-
-.animate-right p{
-    animation-delay:0.2s;
-}
-
-/* FROM BOTTOM RIGHT */
-.animate-bottom-right h1,
-.animate-bottom-right p{
-    animation:fromBottomRight 1s ease forwards;
-}
-
-.animate-bottom-right p{
-    animation-delay:0.2s;
-}
-
-/* FROM BOTTOM LEFT */
-.animate-bottom-left h1,
-.animate-bottom-left p{
-    animation:fromBottomLeft 1s ease forwards;
-}
-
-.animate-bottom-left p{
-    animation-delay:0.2s;
-}
-
-/* KEYFRAMES */
-
-@keyframes fromLeft{
-    from{
-        opacity:0;
-        transform:translateX(-120px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-}
-
-@keyframes fromRight{
-    from{
-        opacity:0;
-        transform:translateX(120px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-}
-
-@keyframes fromBottomRight{
-    from{
-        opacity:0;
-        transform:
-            translate(120px,120px);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translate(0,0);
-    }
-}
-
-@keyframes fromBottomLeft{
-    from{
-        opacity:0;
-        transform:
-            translate(-120px,120px);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translate(0,0);
-    }
-}
-/* =========================
-   ANIMATION TEXT
-========================= */
-
-.content h1,
-.content p{
-    opacity:0;
-}
-
-/* LEFT SIDE */
-
-.animate-left h1,
-.animate-left p{
-    animation:slideFromLeft 1s ease forwards;
-}
-
-.animate-left p{
-    animation-delay:0.2s;
-}
-
-/* RIGHT SIDE */
-
-.animate-right h1,
-.animate-right p{
-    animation:slideFromRight 1s ease forwards;
-}
-
-.animate-right p{
-    animation-delay:0.2s;
-}
-
-/* KEYFRAMES */
-
-@keyframes slideFromLeft{
-
-    from{
-        opacity:0;
-        transform:translateX(-120px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-}
-
-@keyframes slideFromRight{
-
-    from{
-        opacity:0;
-        transform:translateX(120px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-}
-/* =========================
-   BOTTOM ANIMATIONS
-========================= */
-
-.animate-bottom-right h1,
-.animate-bottom-right p{
-    animation:bottomRightUp 1s ease forwards;
-}
-
-.animate-bottom-right p{
-    animation-delay:0.2s;
-}
-
-.animate-bottom-left h1,
-.animate-bottom-left p{
-    animation:bottomLeftUp 1s ease forwards;
-}
-
-.animate-bottom-left p{
-    animation-delay:0.2s;
-}
-
-/* KEYFRAMES */
-
-@keyframes bottomRightUp{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(120px);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0);
-    }
-}
-
-@keyframes bottomLeftUp{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(120px);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0);
-    }
-}
-/* ===================================
-   SERVICES SECTION
-=================================== */
-
-.services-section{
-
-    position:relative;
-
-    background:#050505;
-
-    padding:140px 5vw;
-
-    color:white;
-}
-
-/* HEADER */
-
-.services-header{
-
-    text-align:center;
-
-    margin-bottom:80px;
-}
-
-.services-header span{
-
-    color:#c8a96b;
-
-    text-transform:uppercase;
-
-    letter-spacing:4px;
-
-    font-size:0.9rem;
-}
-
-.services-header h2{
-
-    font-family:'Playfair Display', serif;
-
-    font-size:4rem;
-
-    font-style:italic;
-
-    font-weight:400;
-
-    margin-top:20px;
-}
-
-/* GRID */
-
-.services-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(320px,1fr));
-
-    gap:30px;
-}
-
-/* CARD */
-
-.service-card{
-
-    position:relative;
-
-    height:500px;
-
-    border-radius:28px;
-
-    overflow:hidden;
-
-    cursor:pointer;
-
-    background:#111;
-}
-
-/* IMAGE */
-
-.service-card img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:
-    transform 1s ease,
-    filter 1s ease;
-}
-
-/* OVERLAY */
-
-.service-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,0.92),
-        rgba(0,0,0,0.15)
-    );
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-end;
-
-    padding:40px;
-
-    transition:0.5s ease;
-}
-
-.service-overlay h3{
-
-    font-family:'Playfair Display', serif;
-
-    font-size:2rem;
-
-    font-style:italic;
-
-    margin-bottom:15px;
-}
-
-.service-overlay p{
-
-    opacity:0.8;
-
-    line-height:1.8;
-}
-
-/* HOVER EFFECT */
-
-.service-card:hover img{
-
-    transform:scale(1.08);
-
-    filter:brightness(1.1);
-}
-
-.service-card:hover .service-overlay{
-
-    background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,0.97),
-        rgba(0,0,0,0.05)
-    );
-}
+.overlay { background: rgba(0,0,0,0.5); z-index: 2; }
+
+/* UNIVERSAL CONTENT BOX CONTAINER */
+.content-box { position: relative; width: 96vw; height: 92vh; border-radius: 24px; overflow: hidden; z-index: 3; box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: flex-end; }
+.content-box::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%); z-index: 2; }
+
+/* HEADER BAR */
+.header-bar { position: absolute; top: 0; left: 0; right: 0; padding: 0 60px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
+.logo img { width: 180px; height: auto; object-fit: contain; display: block; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4)); }
+.main-nav-container a { color: white; text-decoration: none; margin-left: 35px; font-size: 0.95rem; font-weight: 400; text-transform: uppercase; letter-spacing: 2px; opacity: 0.75; transition: opacity 0.3s; display: inline-block; }
+.main-nav-container a:hover { color: rgb(255, 234, 0); opacity: 1; }
+
+/* HERO TEXT & ANIMATIONS */
+.content { position: absolute; bottom: 60px; z-index: 3; color: white; width: 600px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); transition: left 0.8s ease, right 0.8s ease; }
+.content.left { left: 60px; right: auto; text-align: left; }
+.content.right { right: 60px; left: auto; text-align: right; }
+.content h1 { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 400; font-style: italic; margin-bottom: 15px; line-height: 1.1; will-change: transform, opacity; }
+.content p { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 300; max-width: 600px; line-height: 1.8; opacity: 0.85; letter-spacing: 0.5px; will-change: transform, opacity; }
+.content h1, .content p { opacity: 0; animation-duration: 1s; animation-timing-function: ease; animation-fill-mode: forwards; }
+.content p { animation-delay: 0.2s; }
+.animate-left h1, .animate-left p { animation-name: fromLeft; }
+.animate-right h1, .animate-right p { animation-name: fromRight; }
+.animate-bottom-right h1, .animate-bottom-right p { animation-name: bottomRightUp; }
+.animate-bottom-left h1, .animate-bottom-left p { animation-name: bottomLeftUp; }
+@keyframes fromLeft { from { opacity:0; transform:translateX(-120px); } to { opacity:1; transform:translateX(0); } }
+@keyframes fromRight { from { opacity:0; transform:translateX(120px); } to { opacity:1; transform:translateX(0); } }
+@keyframes bottomRightUp { from { opacity:0; transform:translateY(120px); } to { opacity:1; transform:translateY(0); } }
+@keyframes bottomLeftUp { from { opacity:0; transform:translateY(120px); } to { opacity:1; transform:translateY(0); } }
+
+/* ABOUT US OVERLAY CARD (TRANSPARENT TO SHOW BG SLIDER) */
+.about-box { display: flex; flex-direction: column; justify-content: space-between; padding: 60px; color: #FFF; z-index: 3; background: rgba(0, 0, 0, 0.4); }
+.about-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 30px; }
+.about-header-left h2 { font-family: 'Playfair Display', serif; font-size: 3rem; font-style: italic; font-weight: 400; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.about-header-left h2 strong { color: rgb(255, 234, 0); font-weight: 400; }
+.about-header-right p { font-size: 0.95rem; color: #EEE; line-height: 1.8; max-width: 500px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: auto 0; padding: 30px 0; }
+.about-card h4 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: rgb(255, 234, 0); font-style: italic; margin-bottom: 12px; font-weight: 400; }
+.about-card p, .about-card blockquote { font-size: 0.95rem; color: #FFF; line-height: 1.7; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.about-card blockquote { font-style: italic; border-left: 3px solid rgb(255, 234, 0); padding-left: 15px; }
+.about-values-strip { display: flex; justify-content: space-between; gap: 15px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 35px; }
+.about-val-item { text-align: center; flex: 1; }
+.about-val-item i { font-size: 2rem; color: rgb(255, 234, 0); margin-bottom: 8px; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+.about-val-item span { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; display: block; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+
+/* SERVICES SECTION */
+.services-section { position: relative; background: #050505; padding: 140px 5vw; color: white; }
+.services-header { text-align: center; margin-bottom: 80px; }
+.services-header span { color: #c8a96b; text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; }
+.services-header h2, .service-overlay h3 { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; }
+.services-header h2 { font-size: 4rem; margin-top: 20px; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.service-card { position: relative; height: 500px; border-radius: 28px; overflow: hidden; cursor: pointer; background: #111; }
+.service-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease, filter 1s ease; }
+.service-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.15)); display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; transition: 0.5s ease; }
+.service-overlay h3 { font-size: 2rem; margin-bottom: 15px; }
+.service-overlay p { opacity: 0.8; line-height: 1.8; }
+.service-card:hover img { transform: scale(1.08); filter: brightness(1.1); }
+.service-card:hover .service-overlay { background: linear-gradient(to top, rgba(0,0,0,0.97), rgba(0,0,0,0.05)); }
 
 /* RESPONSIVE */
-
-@media(max-width:768px){
-
-    .services-header h2{
-
-        font-size:2.5rem;
-    }
-
-    .service-card{
-
-        height:420px;
-    }
+@media (max-width: 992px) {
+  .header-bar { padding: 0 40px; } .content h1 { font-size: 3.5rem; }
+  .about-header { flex-direction: column; gap: 15px; } .about-grid { grid-template-columns: 1fr; gap: 20px; }
+  .about-values-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+}
+@media (max-width: 768px) {
+  .header-bar { top: 25px; flex-direction: column; gap: 15px; padding: 0 20px; }
+  .main-nav-container a { margin: 0 10px; font-size: 0.85rem; letter-spacing: 1px; }
+  .content { padding: 0 24px 40px 24px; } .content h1 { font-size: 2.4rem; } .content p { font-size: 0.95rem; }
+  .services-header h2 { font-size: 2.5rem; } .service-card { height: 420px; }
+  .about-box { padding: 30px; height: auto; min-height: 92vh; justify-content: flex-start; gap: 20px; } 
+  .about-header-left h2 { font-size: 2rem; } .about-grid { padding: 0; }
+  .about-values-strip { grid-template-columns: repeat(2, 1fr); padding-top: 20px; }
 }
 </style>
 </head>
 <body>
 
+<!-- =================== 1. LANDING PAGE HERO SLIDER =================== -->
 <section class="front-page">
+  <div class="bg-slider" id="bgSlider"></div>
+  <div class="overlay"></div>
+  <div class="content-box">
+    <div class="header-bar">
+      <div class="logo"><img src="logo.png" alt="African Queen Empire Logo"></div>
+      <div class="main-nav-container">
+        <a href="#">Services</a><a href="#">Shop</a><a href="#">About Us</a><a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="inner-slider" id="innerSlider"></div>
+    <div class="content right animate-right" id="animatedContent">
+      <h1 id="sliderTitle"></h1>
+      <p id="sliderText"></p>
+    </div>
+  </div>
+</section>
 
-    <!-- Slider d'arrière-plan (flou) -->
-    <div class="bg-slider" id="bgSlider"></div>
-
-    <!-- Overlay de protection -->
-    <div class="overlay"></div>
-
-    <!-- Grande Carte En-tête -->
-    <div class="content-box">
-        
-        <!-- Barre d'en-tête (Logo en haut à gauche, Nav à droite) -->
-        <div class="header-bar">
-            <div class="logo">
-                <img src="logo.png" alt="African Queen Empire Logo">
-            </div>
-            
-            <div class="main-nav-container">
-                <a href="#">Services</a>
-                <a href="#">Shop</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact</a>
-            </div>
-        </div>
-        
-        <!-- Slider central (net) -->
-        <div class="inner-slider" id="innerSlider"></div>
-
-        <!-- Texte dynamique -->
-        <div class="content right animate-right" id="animatedContent">
-            <h1 id="sliderTitle"></h1>
-            <p id="sliderText"></p>
-        </div>
+<!-- =================== 2. ABOUT US (WITH SAME BG SLIDER FUNCTIONALITY) =================== -->
+<section class="about-section">
+  <!-- Second groupe de sliders géré de façon synchrone par le JS -->
+  <div class="bg-slider" id="aboutBgSlider"></div>
+  <div class="overlay"></div>
+  
+  <div class="content-box about-box">
+    <div class="about-header">
+      <div class="about-header-left">
+        <h2>Born from Africa's<br><strong>soul & craft</strong></h2>
+      </div>
+      <div class="about-header-right">
+        <p>African Queen Empire is a lifestyle brand where culture, beauty, and creativity converge — bringing the warmth and elegance of Africa into fashion, décor, hospitality, and beyond.</p>
+      </div>
     </div>
 
+    <div class="about-grid">
+      <div class="about-card">
+        <h4>Our Mission</h4>
+        <blockquote>"Enriching everyday life through quality products and services that celebrate African beauty, creativity, and hospitality."</blockquote>
+      </div>
+      <div class="about-card">
+        <h4>Our Vision</h4>
+        <p>To be a leading African lifestyle brand recognized worldwide for excellence — empowering communities and showcasing the elegance of African culture to the world.</p>
+      </div>
+    </div>
+
+    <div class="about-values-strip">
+      <div class="about-val-item"><i class="ti ti-crown"></i><span>Excellence</span></div>
+      <div class="about-val-item"><i class="ti ti-shield-check"></i><span>Integrity</span></div>
+      <div class="about-val-item"><i class="ti ti-palette"></i><span>Creativity</span></div>
+      <div class="about-val-item"><i class="ti ti-globe"></i><span>African Pride</span></div>
+      <div class="about-val-item"><i class="ti ti-users"></i><span>Empowerment</span></div>
+    </div>
+  </div>
 </section>
+
+<!-- =================== 3. OUR SERVICES =================== -->
 <section class="services-section">
-
-    <div class="services-header">
-        <span>What We Create</span>
-        <h2>Our Services</h2>
+  <div class="services-header"><span>What We Create</span><h2>Our Services</h2></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <img src="https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Handmade Creativity">
+      <div class="service-overlay"><h3>Handmade Creativity</h3><p>Authentic African handmade creations crafted with passion.</p></div>
     </div>
-
-    <div class="services-grid">
-
-        <div class="service-card">
-            <img src="https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=1200">
-
-            <div class="service-overlay">
-                <h3>Handmade Creativity</h3>
-                <p>Authentic African handmade creations crafted with passion.</p>
-            </div>
-        </div>
-
-        <div class="service-card">
-            <img src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1200">
-
-            <div class="service-overlay">
-                <h3>Interior Decoration</h3>
-                <p>Elegant spaces inspired by African warmth and culture.</p>
-            </div>
-        </div>
-
-        <div class="service-card">
-            <img src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1200">
-
-            <div class="service-overlay">
-                <h3>Café Lifestyle</h3>
-                <p>Immersive coffee experiences with cultural elegance.</p>
-            </div>
-        </div>
-
-        <div class="service-card">
-            <img src="https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1200">
-
-            <div class="service-overlay">
-                <h3>Fashion Products</h3>
-                <p>Premium African fashion with bold modern identity.</p>
-            </div>
-        </div>
-
+    <div class="service-card">
+      <img src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Interior Decoration">
+      <div class="service-overlay"><h3>Interior Decoration</h3><p>Elegant spaces inspired by African warmth and culture.</p></div>
     </div>
-
+    <div class="service-card">
+      <img src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Café Lifestyle">
+      <div class="service-overlay"><h3>Café Lifestyle</h3><p>Immersive coffee experiences with cultural elegance.</p></div>
+    </div>
+    <div class="service-card">
+      <img src="https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Fashion Products">
+      <div class="service-overlay"><h3>Fashion Products</h3><p>Premium African fashion with bold modern identity.</p></div>
+    </div>
+  </div>
 </section>
+
 <script>
 const slidesData = [
-    {
-        image: "https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        title: "Handmade Creativity",
-        text: "Unique African crafts made with passion and precision."
-    },
-    {
-        image: "https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        title: "Interior Decoration",
-        text: "Bring warmth and African elegance into your living spaces."
-    },
-    {
-        image: "https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        title: "Coffee Lifestyle",
-        text: "Relax and enjoy an authentic cultural coffee experience."
-    },
-    {
-        image: "https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        title: "Fashion Products",
-        text: "Bold designs and premium African textiles just for you."
-    },
-    {
-        image: "https://images.pexels.com/photos/20167933/pexels-photo-20167933.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        title: "Natural Hair Elegance",
-        text: "Discover the perfect gift with our exclusive African collection."
-    }
+  { image: "./handmade.jpg", title: "Handmade Creativity", text: "Unique African crafts made with passion and precision." },
+  { image: "https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1600", title: "Interior Decoration", text: "Bring warmth and African elegance into your living spaces." },
+  { image: "https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1600", title: "Coffee Lifestyle", text: "Relax and enjoy an authentic cultural coffee experience." },
+  { image: "https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1600", title: "Fashion Products", text: "Bold designs and premium African textiles just for you." },
+  { image: "https://images.pexels.com/photos/20167933/pexels-photo-20167933.jpeg?auto=compress&cs=tinysrgb&w=1600", title: "Natural Hair Elegance", text: "Discover the perfect gift with our exclusive African collection." }
 ];
 
-const bgSlider = document.getElementById("bgSlider");
-const innerSlider = document.getElementById("innerSlider");
-const sliderTitle = document.getElementById("sliderTitle");
-const sliderText = document.getElementById("sliderText");
-
-let currentIndex = 0;
-
-const bgSlidesElements = [];
-const innerSlidesElements = [];
-
-/* =========================
-   PRELOAD DES IMAGES
-========================= */
+const bgSlider = document.getElementById("bgSlider"), innerSlider = document.getElementById("innerSlider"), aboutBgSlider = document.getElementById("aboutBgSlider");
+const sliderTitle = document.getElementById("sliderTitle"), sliderText = document.getElementById("sliderText"), animatedContent = document.getElementById("animatedContent");
+let currentIndex = 0, bgSlidesElements = [], innerSlidesElements = [], aboutBgSlidesElements = [];
 
 function preloadImages() {
-
-    let loaded = 0;
-
-    slidesData.forEach((slide, i) => {
-
-        const img = new Image();
-
-        img.src = slide.image;
-
-        img.onload = () => {
-
-            loaded++;
-
-            if (loaded === slidesData.length) {
-                createSlides();
-                startSlider();
-            }
-        };
-    });
+  let loaded = 0;
+  slidesData.forEach(slide => {
+    const img = new Image(); img.src = slide.image;
+    img.onload = img.onerror = () => { if (++loaded === slidesData.length) { createSlides(); setInterval(nextSlide, 4000); } };
+  });
 }
-
-/* =========================
-   CREATION DES SLIDES
-========================= */
 
 function createSlides() {
-
-    slidesData.forEach((slide, i) => {
-
-        const bgDiv = document.createElement("div");
-
-        bgDiv.className = "bg-slide";
-
-        if(i === 0){
-            bgDiv.classList.add("active");
-        }
-
-        bgDiv.style.backgroundImage = `url('${slide.image}')`;
-
-        bgSlider.appendChild(bgDiv);
-
-        bgSlidesElements.push(bgDiv);
-
-        const innerDiv = document.createElement("div");
-
-        innerDiv.className = "inner-slide";
-
-        if(i === 0){
-            innerDiv.classList.add("active");
-        }
-
-        innerDiv.style.backgroundImage = `url('${slide.image}')`;
-
-        innerSlider.appendChild(innerDiv);
-
-        innerSlidesElements.push(innerDiv);
-    });
-
-    sliderTitle.textContent = slidesData[0].title;
-    sliderText.textContent = slidesData[0].text;
+  slidesData.forEach((slide, i) => {
+    const createDiv = (className) => {
+      const div = document.createElement("div");
+      div.className = className + (i === 0 ? " active" : "");
+      div.style.backgroundImage = `url('${slide.image}')`; return div;
+    };
+    bgSlidesElements.push(bgSlider.appendChild(createDiv("bg-slide")));
+    innerSlidesElements.push(innerSlider.appendChild(createDiv("inner-slide")));
+    // Génération du slider d'arrière-plan pour la section About Us
+    aboutBgSlidesElements.push(aboutBgSlider.appendChild(createDiv("bg-slide")));
+  });
+  sliderTitle.textContent = slidesData[0].title; sliderText.textContent = slidesData[0].text;
 }
-
-/* =========================
-   CHANGEMENT DES SLIDES
-========================= */
-
-const animatedContent =
-document.getElementById("animatedContent");
 
 function nextSlide() {
+  bgSlidesElements[currentIndex].classList.remove("active"); 
+  innerSlidesElements[currentIndex].classList.remove("active");
+  aboutBgSlidesElements[currentIndex].classList.remove("active");
 
-    bgSlidesElements[currentIndex]
-    .classList.remove("active");
+  currentIndex = (currentIndex + 1) % slidesData.length;
 
-    innerSlidesElements[currentIndex]
-    .classList.remove("active");
+  bgSlidesElements[currentIndex].classList.add("active"); 
+  innerSlidesElements[currentIndex].classList.add("active");
+  aboutBgSlidesElements[currentIndex].classList.add("active");
 
-    currentIndex =
-    (currentIndex + 1) % slidesData.length;
-
-    bgSlidesElements[currentIndex]
-    .classList.add("active");
-
-    innerSlidesElements[currentIndex]
-    .classList.add("active");
-
-    sliderTitle.textContent =
-    slidesData[currentIndex].title;
-
-    sliderText.textContent =
-    slidesData[currentIndex].text;
-
-    /* RESET */
-
-    animatedContent.classList.remove(
-    "left",
-    "right",
-    "animate-left",
-    "animate-right",
-    "animate-bottom-right",
-    "animate-bottom-left"
-);
-
-    void animatedContent.offsetWidth;
-
-    /* SLIDE 1 */
-if(currentIndex === 0){
-
-    animatedContent.classList.add(
-        "right",
-        "animate-right"
-    );
-}
-
-/* SLIDE 2 */
-else if(currentIndex === 1){
-
-    animatedContent.classList.add(
-        "left",
-        "animate-left"
-    );
-}
-
-/* SLIDE 3 */
-else if(currentIndex === 2){
-
-    animatedContent.classList.add(
-        "right",
-        "animate-bottom-right"
-    );
-}
-
-/* SLIDE 4 */
-else{
-
-    animatedContent.classList.add(
-        "left",
-        "animate-bottom-left"
-    );
-}
-}
-
-/* =========================
-   ANIMATION TEXTE
-========================= */
-
-function animateText(){
-
-    sliderTitle.style.opacity = "0";
-    sliderText.style.opacity = "0";
-
-    sliderTitle.style.transform = "translateY(20px)";
-    sliderText.style.transform = "translateY(20px)";
-
-    setTimeout(() => {
-
-        sliderTitle.style.transition = "all 0.6s ease";
-        sliderText.style.transition = "all 0.6s ease";
-
-        sliderTitle.style.opacity = "1";
-        sliderText.style.opacity = "1";
-
-        sliderTitle.style.transform = "translateY(0)";
-        sliderText.style.transform = "translateY(0)";
-
-    }, 100);
-}
-
-/* =========================
-   DEMARRAGE
-========================= */
-
-function startSlider(){
-
-    setInterval(nextSlide, 4000);
+  sliderTitle.textContent = slidesData[currentIndex].title; 
+  sliderText.textContent = slidesData[currentIndex].text;
+  
+  animatedContent.className = "content"; void animatedContent.offsetWidth;
+  const animConfig = [["right","animate-right"],["left","animate-left"],["right","animate-bottom-right"],["left","animate-bottom-left"]];
+  animatedContent.classList.add(...(animConfig[currentIndex] || animConfig[3]));
 }
 
 preloadImages();
 </script>
-
 </body>
 </html>
