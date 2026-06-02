@@ -1,401 +1,301 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>African Queen Empire</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Poppins', sans-serif; overflow-x: hidden; background-color: #000; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>African Queen Empire</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Poppins',sans-serif;overflow-x:hidden;background:#000}
 
-/* REUSABLE STRUCTURE & SECTIONS */
-.front-page { position: relative; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-.about-section { position: relative; width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 0vh 0; background-color: #000; }
+    /* ── LAYOUT ── */
+    .front-page,.about-section,.services-page{width:100%;display:flex;justify-content:center;padding:4vh 0}
+    .front-page{position:relative;height:100vh;align-items:center;overflow:hidden}
+    .about-section{position:relative;min-height:100vh;align-items:center;background:#000}
 
-/* LOCAL LANDING PAGE BACKGROUND SLIDER */
-.bg-slider, .front-page-overlay { position: absolute; inset: 0; }
-.bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease-in-out; will-change: opacity; transform: scale(1.02); filter: brightness(0.5); }
-.bg-slide.active { opacity: 0.6; }
-.front-page-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)); z-index: 1; }
+    /* ── BG SLIDER ── */
+    .bg-slider,.front-page-overlay{position:absolute;inset:0}
+    .bg-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease-in-out;will-change:opacity;transform:scale(1.02);filter:brightness(.5)}
+    .bg-slide.active{opacity:.6}
+    .front-page-overlay{background:linear-gradient(to bottom,rgba(0,0,0,.4),rgba(0,0,0,.8));z-index:1}
 
-/* UNIVERSAL CONTENT BOX CONTAINER */
-.content-box { position: relative; width: 96vw; height: 92vh; border-radius: 24px; overflow: hidden; z-index: 3; box-shadow: 0 20px 50px rgba(0,0,0,0.8); display: flex; flex-direction: column; justify-content: flex-end; }
-.content-box::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%); z-index: 2; }
+    /* ── CONTENT BOX ── */
+    .content-box{position:relative;width:96vw;height:92vh;border-radius:24px;overflow:hidden;z-index:3;box-shadow:0 20px 50px rgba(0,0,0,.8);display:flex;flex-direction:column;justify-content:flex-end}
+    .content-box::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.2));z-index:2}
 
-/* HEADER BAR */
-.header-bar { position: absolute; top: 0; left: 0; right: 0; padding: 0 60px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
-.logo img { width: 180px; height: auto; object-fit: contain; display: block; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4)); }
-.main-nav-container a { color: white; text-decoration: none; margin-left: 35px; font-size: 0.95rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; opacity: 0.75; transition: opacity 0.3s; display: inline-block; }
-.main-nav-container a:hover { color: rgb(255, 234, 0); opacity: 1; }
+    /* ── HEADER ── */
+    .header-bar{position:absolute;top:0;left:0;right:0;padding:0 60px;display:flex;justify-content:space-between;align-items:center;z-index:10}
+    .logo img{width:180px;height:auto;object-fit:contain;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+    .main-nav-container a{color:#fff;text-decoration:none;margin-left:35px;font-size:.95rem;font-weight:500;text-transform:uppercase;letter-spacing:2px;opacity:.75;transition:opacity .3s;display:inline-block}
+    .main-nav-container a:hover{color:rgb(255,234,0);opacity:1}
 
-/* HERO TEXT & ANIMATIONS (LANDING) */
-.inner-slider { position: absolute; inset: 0; z-index: 1; }
-.inner-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease; }
-.inner-slide.active { opacity: 1; }
-.content { position: absolute; bottom: 60px; z-index: 3; color: white; width: 600px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); transition: left 0.8s ease, right 0.8s ease; }
-.content.left { left: 60px; right: auto; text-align: left; }
-.content.right { right: 60px; left: auto; text-align: right; }
-.content h1 { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 400; font-style: italic; margin-bottom: 0px; line-height: 1.1; }
-.content p { font-size: 1.1rem; font-weight: 300; max-width: 600px; line-height: 1.8; opacity: 0.85; letter-spacing: 0.5px; }
-.content h1, .content p { opacity: 0; animation-duration: 1s; animation-timing-function: ease; animation-fill-mode: forwards; }
-.content p { animation-delay: 0.2s; }
-.animate-left h1, .animate-left p { animation-name: fromLeft; }
-.animate-right h1, .animate-right p { animation-name: fromRight; }
-.animate-bottom-right h1, .animate-bottom-right p { animation-name: bottomRightUp; }
-.animate-bottom-left h1, .animate-bottom-left p { animation-name: bottomLeftUp; }
-@keyframes fromLeft { from { opacity:0; transform:translateX(-120px); } to { opacity:1; transform:translateX(0); } }
-@keyframes fromRight { from { opacity:0; transform:translateX(120px); } to { opacity:1; transform:translateX(0); } }
-@keyframes bottomRightUp { from { opacity:0; transform:translateY(120px); } to { opacity:1; transform:translateY(0); } }
-@keyframes bottomLeftUp { from { opacity:0; transform:translateY(120px); } to { opacity:1; transform:translateY(0); } }
+    /* ── HERO SLIDER ── */
+    .inner-slider{position:absolute;inset:0;z-index:1}
+    .inner-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
+    .inner-slide.active{opacity:1}
+    .content{position:absolute;bottom:60px;z-index:3;color:#fff;width:600px;text-shadow:0 2px 4px rgba(0,0,0,.6);transition:left .8s ease,right .8s ease}
+    .content.left{left:60px;right:auto;text-align:left}
+    .content.right{right:60px;left:auto;text-align:right}
+    .content h1{font-family:'Playfair Display',serif;font-size:3rem;font-weight:400;font-style:italic;margin-bottom:0;line-height:1.1}
+    .content p{font-size:1.1rem;font-weight:300;max-width:600px;line-height:1.8;opacity:.85;letter-spacing:.5px}
+    .content h1,.content p{opacity:0;animation-duration:1s;animation-timing-function:ease;animation-fill-mode:forwards}
+    .content p{animation-delay:.2s}
+    .animate-left h1,.animate-left p{animation-name:fromLeft}
+    .animate-right h1,.animate-right p{animation-name:fromRight}
+    .animate-bottom-right h1,.animate-bottom-right p{animation-name:bottomRightUp}
+    .animate-bottom-left h1,.animate-bottom-left p{animation-name:bottomLeftUp}
+    @keyframes fromLeft{from{opacity:0;transform:translateX(-120px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes fromRight{from{opacity:0;transform:translateX(120px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes bottomRightUp{from{opacity:0;transform:translateY(120px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes bottomLeftUp{from{opacity:0;transform:translateY(120px)}to{opacity:1;transform:translateY(0)}}
 
-/* ===== ABOUT US UNROLLED IN A GIANT AUTO-EXTENDING CARD ===== */
-.about-card-unrolled {
-  height: auto !important; 
-  overflow: hidden !important; 
-  justify-content: flex-start !important;
-  background-color: rgba(20, 20, 20, 0.6); 
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  background: linear-gradient(160deg, #1A0A00 0%, #5C2D00 30%, #A0522D 60%, #D4A04A 85%, #F0D080 100%);
+    /* ── ABOUT ── */
+    .about-card-unrolled{height:auto!important;overflow:hidden!important;justify-content:flex-start!important;border:1px solid rgba(255,255,255,.03);background:linear-gradient(160deg,#b7b4b2 0%,#5C2D00 30%,#A0522D 60%,#D4A04A 85%,#e7e3d8 100%)}
+    .about-card-unrolled::after{display:none}
+    .about-block-wrap.white-version{position:relative;width:100%;min-height:88vh;display:flex;flex-direction:column;justify-content:space-between;z-index:4;overflow:hidden}
+    .about-block-wrap.white-version::before{content:"";position:absolute;inset:0;background-image:url('logo.png');background-repeat:no-repeat;background-position:center;background-size:35%;opacity:.2;z-index:1;pointer-events:none}
+    .about-hero-content-split{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:60px;padding:80px 6vw 40px;flex:1}
+    .about-hero-text-side{flex:1;max-width:540px}
+    .about-hero-text-side .about-title-h2{color:#e8e6e6!important;font-size:4.5rem;margin-bottom:20px}
+    .about-hero-text-side .about-hero-desc p{color:#e8e4e4!important;font-size:1.05rem;line-height:1.9}
+    .about-hero-cards-side{flex:1;display:flex;justify-content:center;align-items:center}
+    .cards-deck{position:relative;width:320px;height:400px}
+    .card-item{position:absolute;width:240px;height:320px;border-radius:16px;object-fit:cover;box-shadow:0 15px 35px rgba(0,0,0,.25);border:6px solid #dacf2a;transition:transform .4s ease}
+    .card-1{z-index:3;transform:translate(0,0) rotate(-6deg)}
+    .card-2{z-index:2;transform:translate(35px,-20px) rotate(4deg)}
+    .card-3{z-index:1;transform:translate(70px,-40px) rotate(14deg)}
+    .cards-deck:hover .card-1{transform:translate(-10px,5px) rotate(-10deg)}
+    .cards-deck:hover .card-2{transform:translate(45px,-25px) rotate(6deg)}
+    .cards-deck:hover .card-3{transform:translate(95px,-50px) rotate(18deg)}
 
-}
-.about-card-unrolled::after { display: none; } 
+    /* ── ABOUT ROWS (MISSION / VISION) ── */
+    .about-row{position:relative;width:100%;min-height:75vh;display:flex;align-items:stretch;z-index:4;background:rgba(5,5,5,.9);border-top:1px solid rgba(255,255,255,.05)}
+    .about-row.reverse{flex-direction:row-reverse;background:rgba(8,6,0,.9)}
+    .eyebrow{font-size:.8rem;letter-spacing:5px;text-transform:uppercase;color:rgb(255,234,0);margin-bottom:18px;display:block}
+    .about-title-h2{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:400;font-style:italic;color:#fff;line-height:1.1}
+    .about-deco-line{width:60px;height:2px;background:rgb(255,234,0);margin:30px 0}
+    .about-values-strip{position:relative;z-index:2;display:flex;background:rgba(15,15,15,.98);border-top:1px solid rgba(255,255,255,.05);padding:35px 4vw;width:100%}
+    .about-val-item{text-align:center;flex:1;border-right:1px solid rgba(255,255,255,.08)}
+    .about-val-item:last-child{border-right:none}
+    .about-val-item i{font-size:2rem;color:rgb(255,234,0);margin-bottom:8px;display:block}
+    .about-val-item span{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;display:block;color:#fff}
+    .side-images{position:relative;flex:0 0 45%;display:grid}
+    .side-images.two-rows{grid-template-rows:1fr}
+    .side-images.two-cols{grid-template-columns:1fr 1fr}
+    .side-img{width:100%;height:100%;object-fit:cover;display:block}
+    .side-images::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,rgba(5,5,5,.95));z-index:2}
+    .reverse .side-images::after{background:linear-gradient(to left,transparent 60%,rgba(8,6,0,.95))}
+    .side-text-content{flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 6vw;color:#fff;background-image:url('https://images.pexels.com/photos/31653080/pexels-photo-31653080.jpeg')}
+    .side-text-content blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:#EEE;line-height:1.8;border-left:3px solid rgb(255,234,0);padding-left:20px;max-width:500px}
+    .side-text-content p{font-size:1.05rem;color:#EEE;line-height:1.9;max-width:480px}
 
-/* PARTIE INTRO ABOUT US - ARRIÈRE-PLAN BLANC */
-.about-block-wrap.white-version {
-  position: relative;
-  width: 100%;
-  min-height: 88vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 4;
-  overflow: hidden;
-}
+    /* ── SERVICE CARD (shared) ── */
+    .service-card{position:relative;width:100%;border-radius:24px;overflow:hidden;cursor:pointer;background:#111;box-shadow:0 15px 40px rgba(0,0,0,.4)}
+    .service-card img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease,filter 1s ease}
+    .service-card:hover img{transform:scale(1.05);filter:brightness(1.05)}
+    .service-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.4) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:50px}
+    .service-overlay h3{font-family:'Playfair Display',serif;font-style:italic;font-size:2.5rem;margin-bottom:12px;font-weight:400;color:rgb(255,234,0)}
+    .service-overlay p{opacity:.9;line-height:1.8;font-size:1.1rem;color:#fff;max-width:650px}
 
-/* Incrustation du logo en arrière-plan (Watermark) */
-.about-block-wrap.white-version::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('logo.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 35%;
-  opacity: 0.2; /* Transparence pour un rendu filigrane discret */
-  z-index: 1;
-  pointer-events: none;
-}
+    /* ── SERVICES PAGE ── */
+    .services-page{position:relative;min-height:100vh;align-items:flex-start;padding:0;background:#000}
+    .services-unrolled-card{height:auto!important;min-height:100vh;overflow:hidden;justify-content:flex-start!important;background:linear-gradient(160deg,#0d0d0d 0%,#1a1207 25%,#4d2c00 55%,#8c5a17 82%,#d4a04a 100%);border:1px solid rgba(255,255,255,.05)}
+    .services-unrolled-card::after{display:none}
+    .services-header-inside{position:relative;z-index:5;width:100%;padding:90px 6vw 60px;text-align:center;color:#fff}
+    .services-header-inside span{text-transform:uppercase;letter-spacing:5px;font-size:.85rem;opacity:.7}
+    .services-header-inside h2{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:4.5rem;margin-top:20px}
+    .services-vertical-flow{position:relative;z-index:5;width:100%;display:flex;flex-direction:column;gap:50px;padding:0 6vw 100px}
+    .services-vertical-flow .service-card{min-height:85vh;display:flex;align-items:stretch;box-shadow:0 25px 60px rgba(0,0,0,.45);border-radius:30px}
+    .services-vertical-flow .service-card.reverse{flex-direction:row-reverse}
+    .service-image{position:relative;flex:0 0 50%}
+    .service-image img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+    .service-content{position:relative;flex:1;padding:90px 70px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(to bottom right,rgba(0,0,0,.95),rgba(20,12,0,.92))}
+    .service-content h3{font-family:'Playfair Display',serif;font-style:italic;font-size:4rem;font-weight:400;line-height:1.1;color:rgb(255,234,0);margin-bottom:30px}
+    .service-content p{font-size:1.1rem;line-height:2;color:rgba(255,255,255,.88);max-width:650px}
+    .services-vertical-flow .service-card:hover .service-image img{transform:scale(1.08)}
 
-/* Structure Scindée Gauche / Droite */
-.about-hero-content-split {
-  position: relative;
-  z-index: 2; /* Reste au-dessus du filigrane */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 60px;
-  padding: 80px 6vw 40px;
-  flex: 1;
-}
-
-/* Texte à gauche */
-.about-hero-text-side {
-  flex: 1;
-  max-width: 540px;
-}
-.about-hero-text-side .about-title-h2 {
-  color: #e8e6e6 !important; 
-  font-size: 4.5rem;
-  margin-bottom: 20px;
-}
-.about-hero-text-side .about-hero-desc p {
-  color: #e8e4e4 !important; 
-  font-size: 1.05rem;
-  line-height: 1.9;
-}
-
-/* Cartes de jeu superposées à droite */
-.about-hero-cards-side {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 0px; 
-}
-.cards-deck {
-  position: relative;
-  width: 320px;
-  height: 400px;
-}
-.card-item {
-  position: absolute;
-  width: 240px;
-  height: 320px;
-  border-radius: 16px;
-  object-fit: cover;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-  border: 6px solid #dacf2a; 
-  transition: transform 0.4s ease;
-}
-
-/* Alignement et inclinaison des cartes */
-.card-1 {
-  z-index: 3; 
-  transform: translate(0, 0) rotate(-6deg);
-}
-.card-2 {
-  z-index: 2; 
-  transform: translate(35px, -20px) rotate(4deg);
-}
-.card-3 {
-  z-index: 1; 
-  transform: translate(70px, -40px) rotate(14deg);
-}
-
-/* Effet de survol sur le paquet de cartes */
-.cards-deck:hover .card-1 { transform: translate(-10px, 5px) rotate(-10deg); }
-.cards-deck:hover .card-2 { transform: translate(45px, -25px) rotate(6deg); }
-.cards-deck:hover .card-3 { transform: translate(95px, -50px) rotate(18deg); }
-
-
-/* SECTION COMPLÉMENTAIRES ABOUT US (MISSION / VISION) */
-.about-row { position: relative; width: 100%; min-height: 75vh; display: flex; align-items: stretch; z-index: 4; background: rgba(5,5,5,0.9); border-top: 1px solid rgba(255,255,255,0.05); }
-.about-row.reverse { flex-direction: row-reverse; background: rgba(8,6,0,0.9); }
-
-/* Typography */
-.eyebrow { font-size: 0.8rem; letter-spacing: 5px; text-transform: uppercase; color: rgb(255, 234, 0); margin-bottom: 18px; display: block; }
-.about-title-h2 { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 400; font-style: italic; color: #fff; line-height: 1.1; }
-.about-deco-line { width: 60px; height: 2px; background: rgb(255, 234, 0); margin: 30px 0; }
-
-/* Values Strip */
-.about-values-strip { position: relative; z-index: 2; display: flex; background: rgba(15, 15, 15, 0.98); border-top: 1px solid rgba(0,0,0,0.05); padding: 35px 4vw; width: 100%; }
-.about-val-item { text-align: center; flex: 1; border-right: 1px solid rgba(255,255,255,0.08); }
-.about-val-item:last-child { border-right: none; }
-.about-val-item i { font-size: 2rem; color: rgb(255, 234, 0); margin-bottom: 8px; display: block; }
-.about-val-item span { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; display: block; color: #fff; }
-
-/* Split Sections (Mission & Vision) */
-.side-images { position: relative; flex: 0 0 45%; display: grid; }
-.side-images.two-rows { grid-template-rows: 1fr ; }
-.side-images.two-cols { grid-template-columns: 1fr 1fr; }
-.side-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.side-images::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 60%, rgba(5,5,5,0.95)); z-index: 2; }
-.reverse .side-images::after { background: linear-gradient(to left, transparent 60%, rgba(8,6,0,0.95)); }
-
-.side-text-content { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 80px 6vw; color: #fff; }
-.side-text-content blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: #EEE; line-height: 1.8; border-left: 3px solid rgb(255, 234, 0); padding-left: 20px; max-width: 500px; }
-.side-text-content p { font-size: 1.05rem; color: #EEE; line-height: 1.9; max-width: 480px; }
-
-/* SERVICES SECTION */
-.services-section { position: relative; background: #050505; padding: 140px 5vw; color: white; z-index: 4; }
-.services-header { text-align: center; margin-bottom: 80px; }
-.services-header span { color: #c8a96b; text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; }
-.services-header h2 { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; font-size: 4rem; margin-top: 20px; }
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-.service-card { position: relative; height: 500px; border-radius: 28px; overflow: hidden; cursor: pointer; background: #111; }
-.service-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease, filter 1s ease; }
-.service-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.15)); display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; }
-.service-overlay h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; margin-bottom: 15px; font-weight: 400; }
-.service-overlay p { opacity: 0.8; line-height: 1.8; }
-.service-card:hover img { transform: scale(1.08); filter: brightness(1.1); }
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 992px) {
-  .header-bar { padding: 0 40px; } .content h1 { font-size: 3.5rem; }
-  .about-hero-content-split { flex-direction: column; text-align: center; gap: 40px; padding: 60px 4vw; }
-  .about-hero-cards-side { padding-right: 40px; }
-  .about-title-h2 { font-size: 3rem; }
-  .about-row, .about-row.reverse { flex-direction: column; }
-  .side-images { flex: 0 0 40vh; width: 100%; grid-template-rows: 1fr !important; grid-template-columns: 1fr 1fr !important; }
-  .side-images::after { display: none; }
-  .about-values-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-  .about-val-item { border-right: none; }
-}
-@media (max-width: 768px) {
-  .header-bar { top: 25px; flex-direction: column; gap: 15px; padding: 0 20px; }
-  .main-nav-container a { margin: 0 10px; font-size: 0.85rem; letter-spacing: 1px; }
-  .content { padding: 0 24px 40px 24px; } .content h1 { font-size: 2.4rem; }
-  .services-header h2 { font-size: 2.5rem; } .service-card { height: 420px; }
-  .about-values-strip { grid-template-columns: repeat(2, 1fr); }
-  .cards-deck { width: 200px; height: 300px; }
-  .card-item { width: 160px; height: 230px; border-width: 4px; }
-  .about-hero-text-side .about-title-h2 { font-size: 3rem; }
-}
-</style>
+    /* ── RESPONSIVE ── */
+    @media(max-width:992px){
+      .header-bar{padding:0 40px}
+      .content h1{font-size:3.5rem}
+      .about-hero-content-split{flex-direction:column;text-align:center;gap:40px;padding:60px 4vw}
+      .about-hero-cards-side{padding-right:40px}
+      .about-title-h2{font-size:3rem}
+      .about-row,.about-row.reverse{flex-direction:column}
+      .side-images{flex:0 0 40vh;width:100%;grid-template-rows:1fr!important;grid-template-columns:1fr 1fr!important}
+      .side-images::after{display:none}
+      .about-values-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+      .about-val-item{border-right:none}
+      .services-header-inside h2{font-size:3rem}
+      .services-vertical-flow .service-card,.services-vertical-flow .service-card.reverse{flex-direction:column}
+      .service-image{height:380px}
+      .service-content{padding:50px 35px}
+      .service-content h3{font-size:2.8rem}
+    }
+    @media(max-width:768px){
+      .header-bar{top:25px;flex-direction:column;gap:15px;padding:0 20px}
+      .main-nav-container a{margin:0 10px;font-size:.85rem;letter-spacing:1px}
+      .content{padding:0 24px 40px}
+      .content h1{font-size:2.4rem}
+      .services-header-inside h2{font-size:2.5rem}
+      .service-content h3{font-size:1.8rem}
+      .service-content{padding:25px}
+      .about-values-strip{grid-template-columns:repeat(2,1fr)}
+      .cards-deck{width:200px;height:300px}
+      .card-item{width:160px;height:230px;border-width:4px}
+      .about-hero-text-side .about-title-h2{font-size:3rem}
+    }
+  </style>
 </head>
 <body>
 
-<!-- =================== 1. LANDING PAGE HERO (WITH LOCAL SLIDER) =================== -->
-<section class="front-page">
-  <div class="bg-slider" id="bgSlider"></div>
-  <div class="front-page-overlay"></div>
-
-  <div class="content-box">
-    <div class="header-bar">
-      <div class="logo"><img src="logo.png" alt="African Queen Empire Logo"></div>
-      <div class="main-nav-container">
-        <a href="#">Services</a><a href="#">Shop</a><a href="#">About Us</a><a href="#">Contact</a>
+  <!-- LANDING -->
+  <section class="front-page">
+    <div class="bg-slider" id="bgSlider"></div>
+    <div class="front-page-overlay"></div>
+    <div class="content-box">
+      <div class="header-bar">
+        <div class="logo"><img src="logo.png" alt="African Queen Empire Logo"></div>
+        <div class="main-nav-container">
+          <a href="#">Services</a><a href="#">Shop</a><a href="#">About Us</a><a href="#">Contact</a>
+        </div>
+      </div>
+      <div class="inner-slider" id="innerSlider"></div>
+      <div class="content right animate-right" id="animatedContent">
+        <h1 id="sliderTitle"></h1>
+        <p id="sliderText"></p>
       </div>
     </div>
-    <div class="inner-slider" id="innerSlider"></div>
-    <div class="content right animate-right" id="animatedContent">
-      <h1 id="sliderTitle"></h1>
-      <p id="sliderText"></p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- =================== 2. ABOUT US UNROLLED IN A CARD SHAPE =================== -->
-<section class="about-section">
-  
-  <div class="content-box about-card-unrolled">
-    
-    <!-- BLOCK 1: INTRO SPLIT & CARD DECK (WHITE BACKGROUND + LOGO WATERMARK) -->
-    <div class="about-block-wrap white-version">
-      
-      <div class="about-hero-content-split">
-        <!-- Côté Gauche : Mots / Texte -->
-        <div class="about-hero-text-side">
-          <h2 class="about-title-h2">About Us</h2>
-          <div class="about-hero-desc">
-            <p>African Queen Empire is a lifestyle brand where culture, beauty, and creativity converge — bringing the warmth and elegance of Africa into fashion, décor, hospitality, and beyond.</p>
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="content-box about-card-unrolled">
+      <div class="about-block-wrap white-version">
+        <div class="about-hero-content-split">
+          <div class="about-hero-text-side">
+            <h2 class="about-title-h2">About Us</h2>
+            <div class="about-hero-desc">
+              <p>African Queen Empire is a lifestyle brand where culture, beauty, and creativity converge — bringing the warmth and elegance of Africa into fashion, décor, hospitality, and beyond.</p>
+            </div>
           </div>
-        </div>
-        
-        <!-- Côté Droit : 3 Images superposées comme des cartes -->
-        <div class="about-hero-cards-side">
-          <div class="cards-deck">
-            <!-- Première carte : devant, entière -->
-            <img class="card-item card-1" src="https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=700" alt="African Fashion">
-            <!-- Deuxième carte : un peu derrière -->
-            <img class="card-item card-2" src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Interior Decor">
-            <!-- Troisième carte : derrière la deuxième -->
-            <img class="card-item card-3" src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Café Lifestyle">
+          <div class="about-hero-cards-side">
+            <div class="cards-deck">
+              <img class="card-item card-1" src="https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=700" alt="African Fashion">
+              <img class="card-item card-2" src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Interior Decor">
+              <img class="card-item card-3" src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Café Lifestyle">
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Bandeau des valeurs (Sert de transition fluide avec la suite sombre) -->
-      
-    </div>
-
-    <!-- BLOCK 2:MISSION -->
-    
-     
-    <div class="about-row">
-      <div class="side-images two-rows">
-        <!--img class="side-img" src="https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Mission 1"-->
+      <div class="about-row">
+        <div class="side-images two-rows"></div>
+        <div class="side-text-content">
+          <span class="eyebrow">Our Purpose</span>
+          <h2 class="about-title-h2">Our Mission</h2>
+          <div class="about-deco-line"></div>
+          <blockquote>"Enriching everyday life through quality products and services that celebrate African beauty, creativity, and hospitality."</blockquote>
+        </div>
       </div>
-      <div class="side-text-content">
-        <span class="eyebrow">Our Purpose</span>
-        <h2 class="about-title-h2">Our Mission</h2>
-        <div class="about-deco-line"></div>
-        <blockquote>"Enriching everyday life through quality products and services that celebrate African beauty, creativity, and hospitality."</blockquote>
+      <div class="about-row reverse">
+        <div class="side-images two-cols"></div>
+        <div class="side-text-content">
+          <span class="eyebrow">Where We're Headed</span>
+          <h2 class="about-title-h2">Our Vision</h2>
+          <div class="about-deco-line"></div>
+          <p>To be a leading African lifestyle brand recognized worldwide for excellence — empowering communities and showcasing the elegance of African culture to the world.</p>
+        </div>
       </div>
-    </div>
-
-    <div class="about-row reverse">
-      <div class="side-images two-cols">
-        <!--
-        <img class="side-img" src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Vision 1">
-        <img class="side-img" src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Vision 2">
-        -->
-      </div>
-      <div class="side-text-content">
-        <span class="eyebrow">Where We're Headed</span>
-        <h2 class="about-title-h2">Our Vision</h2>
-        <div class="about-deco-line"></div>
-        <p>To be a leading African lifestyle brand recognized worldwide for excellence — empowering communities and showcasing the elegance of African culture to the world.</p>
-      </div>
-    </div>
-   
-    <div class="about-values-strip">
+      <div class="about-values-strip">
         <div class="about-val-item"><i class="ti ti-crown"></i><span>Excellence</span></div>
         <div class="about-val-item"><i class="ti ti-shield-check"></i><span>Integrity</span></div>
         <div class="about-val-item"><i class="ti ti-palette"></i><span>Creativity</span></div>
         <div class="about-val-item"><i class="ti ti-globe"></i><span>African Pride</span></div>
         <div class="about-val-item"><i class="ti ti-users"></i><span>Empowerment</span></div>
       </div>
-
-  </div>
-</section>
-
-<!-- =================== 3. OUR SERVICES =================== -->
-<section class="services-section">
-  <div class="services-header"><span>What We Create</span><h2>Our Services</h2></div>
-  <div class="services-grid">
-    <div class="service-card">
-      <img src="https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Handmade Creativity">
-      <div class="service-overlay"><h3>Handmade Creativity</h3><p>Authentic African handmade creations crafted with passion.</p></div>
     </div>
-    <div class="service-card">
-      <img src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Interior Decoration">
-      <div class="service-overlay"><h3>Interior Decoration</h3><p>Elegant spaces inspired by African warmth and culture.</p></div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-page">
+    <div class="content-box services-unrolled-card">
+      <div class="services-header-inside">
+        <span>What We Create</span>
+        <h2>Our Services</h2>
+      </div>
+      <div class="services-vertical-flow">
+        <div class="service-card">
+          <div class="service-image"><img src="https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Handmade"></div>
+          <div class="service-content">
+            <h3>Handmade Creativity</h3>
+            <p>Authentic African handmade creations crafted with passion, precision, and cultural identity — transforming tradition into timeless artistic pieces.</p>
+          </div>
+        </div>
+        <div class="service-card reverse">
+          <div class="service-image"><img src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Interior"></div>
+          <div class="service-content">
+            <h3>Interior Decoration</h3>
+            <p>Elegant interiors inspired by African warmth, luxury, textures, and natural aesthetics for modern living spaces.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-image"><img src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Café"></div>
+          <div class="service-content">
+            <h3>Café Lifestyle</h3>
+            <p>Immersive coffee experiences blending African hospitality, atmosphere, culture, and premium taste.</p>
+          </div>
+        </div>
+        <div class="service-card reverse">
+          <div class="service-image"><img src="https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Fashion"></div>
+          <div class="service-content">
+            <h3>Fashion Products</h3>
+            <p>Premium African fashion products designed with bold identity, elegance, and contemporary luxury.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="service-card">
-      <img src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Café Lifestyle">
-      <div class="service-overlay"><h3>Café Lifestyle</h3><p>Immersive coffee experiences with cultural elegance.</p></div>
-    </div>
-    <div class="service-card">
-      <img src="https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Fashion Products">
-      <div class="service-overlay"><h3>Fashion Products</h3><p>Premium African fashion with bold modern identity.</p></div>
-    </div>
-    <div class="service-card">
-      <img src="https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Fashion Products">
-      <div class="service-overlay"><h3>Natural Hair Elegance</h3><p>Premium African fashion with bold modern identity.</p></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<script>
-const slidesData = [
-  { image: "./handmade.jpg", title: "Handmade Creativity", text: "Unique African crafts made with passion and precision." },
-  { image: "https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1600", title: "Interior Decoration", text: "Bring warmth and African elegance into your living spaces." },
-  { image: "https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1600", title: "Coffee Lifestyle", text: "Relax and enjoy an authentic cultural coffee experience." },
-  { image: "https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1600", title: "Fashion Products", text: "Bold designs and premium African textiles just for you." },
-  { image: "https://images.pexels.com/photos/20167933/pexels-photo-20167933.jpeg?auto=compress&cs=tinysrgb&w=1600", title: "Natural Hair Elegance", text: "Discover the perfect gift with our exclusive African collection." }
-];
+  <script>
+    const slides=[
+      {image:"./handmade.jpg",title:"Handmade Creativity",text:"Unique African crafts made with passion and precision."},
+      {image:"https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=1600",title:"Interior Decoration",text:"Bring warmth and African elegance into your living spaces."},
+      {image:"https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1600",title:"Coffee Lifestyle",text:"Relax and enjoy an authentic cultural coffee experience."},
+      {image:"https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1600",title:"Fashion Products",text:"Bold designs and premium African textiles just for you."},
+      {image:"https://images.pexels.com/photos/20167933/pexels-photo-20167933.jpeg?auto=compress&cs=tinysrgb&w=1600",title:"Natural Hair Elegance",text:"Discover the perfect gift with our exclusive African collection."}
+    ];
+    const bgSlider=document.getElementById("bgSlider"),innerSlider=document.getElementById("innerSlider");
+    const sliderTitle=document.getElementById("sliderTitle"),sliderText=document.getElementById("sliderText"),ac=document.getElementById("animatedContent");
+    let idx=0,bgS=[],inS=[];
+    const animCfg=[["right","animate-right"],["left","animate-left"],["right","animate-bottom-right"],["left","animate-bottom-left"]];
 
-const bgSlider = document.getElementById("bgSlider"), innerSlider = document.getElementById("innerSlider");
-const sliderTitle = document.getElementById("sliderTitle"), sliderText = document.getElementById("sliderText"), animatedContent = document.getElementById("animatedContent");
-let currentIndex = 0, bgSlides = [], innerSlides = [];
-
-function preloadImages() {
-  let loaded = 0;
-  slidesData.forEach(slide => {
-    const img = new Image(); img.src = slide.image;
-    img.onload = img.onerror = () => { if (++loaded === slidesData.length) { createSlides(); setInterval(nextSlide, 4000); } };
-  });
-}
-
-function createSlides() {
-  slidesData.forEach((slide, i) => {
-    const createDiv = (className) => {
-      const div = document.createElement("div");
-      div.className = className + (i === 0 ? " active" : "");
-      div.style.backgroundImage = `url('${slide.image}')`; return div;
-    };
-    bgSlides.push(bgSlider.appendChild(createDiv("bg-slide")));
-    innerSlides.push(innerSlider.appendChild(createDiv("inner-slide")));
-  });
-  sliderTitle.textContent = slidesData[0].title; sliderText.textContent = slidesData[0].text;
-}
-
-function nextSlide() {
-  [bgSlides[currentIndex], innerSlides[currentIndex]].forEach(el => el.classList.remove("active"));
-  currentIndex = (currentIndex + 1) % slidesData.length;
-  [bgSlides[currentIndex], innerSlides[currentIndex]].forEach(el => el.classList.add("active"));
-
-  sliderTitle.textContent = slidesData[currentIndex].title; 
-  sliderText.textContent = slidesData[currentIndex].text;
-  
-  animatedContent.className = "content"; void animatedContent.offsetWidth;
-  const animConfig = [["right","animate-right"],["left","animate-left"],["right","animate-bottom-right"],["left","animate-bottom-left"]];
-  animatedContent.classList.add(...(animConfig[currentIndex] || animConfig[3]));
-}
-
-preloadImages();
-</script>
+    function mkSlide(parent,cls,img,active){
+      const d=document.createElement("div");
+      d.className=cls+(active?" active":"");
+      d.style.backgroundImage=`url('${img}')`;
+      return parent.appendChild(d);
+    }
+    function init(){
+      slides.forEach((s,i)=>{bgS.push(mkSlide(bgSlider,"bg-slide",s.image,i===0));inS.push(mkSlide(innerSlider,"inner-slide",s.image,i===0))});
+      sliderTitle.textContent=slides[0].title;sliderText.textContent=slides[0].text;
+    }
+    function next(){
+      [bgS[idx],inS[idx]].forEach(e=>e.classList.remove("active"));
+      idx=(idx+1)%slides.length;
+      [bgS[idx],inS[idx]].forEach(e=>e.classList.add("active"));
+      sliderTitle.textContent=slides[idx].title;sliderText.textContent=slides[idx].text;
+      ac.className="content";void ac.offsetWidth;
+      ac.classList.add(...(animCfg[idx]||animCfg[3]));
+    }
+    function preload(){
+      let n=0;
+      slides.forEach(s=>{const i=new Image();i.src=s.image;i.onload=i.onerror=()=>{if(++n===slides.length){init();setInterval(next,4000)}}});
+    }
+    preload();
+  </script>
 </body>
 </html>
