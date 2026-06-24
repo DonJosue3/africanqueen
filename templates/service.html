@@ -1,0 +1,973 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;500&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
+      background: #faf8f4;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .page-header {
+      padding: 2.5rem 2rem 1.5rem;
+      border-bottom: 1px solid #e5ddd0;
+      background-color: #ffffff;
+    }
+
+    .page-eyebrow {
+      color: #d4a04a;
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #1a1208;
+      font-size: 36px;
+      line-height: 1.1;
+    }
+
+    .services-list {
+      position: relative;
+    }
+
+    .srv-line {
+      position: absolute;
+      left: 2rem;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, #d4a04a 0%, #2a1800 100%);
+    }
+
+    .srv-item {
+      position: relative;
+      border-bottom: 1px solid #e5ddd0;
+      cursor: pointer;
+    }
+
+    .srv-trigger {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.4rem 2rem 1.4rem 4rem;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .srv-trigger:hover {
+      background: rgba(212, 160, 74, 0.04);
+    }
+
+    .srv-dot {
+      position: absolute;
+      left: 1.72rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #2a2a2a;
+      border: 1.5px solid #d4a04a;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .srv-item.active .srv-dot {
+      background: #d4a04a;
+      transform: translateY(-50%) scale(1.3);
+    }
+
+    .srv-thumb{
+    width:64px;
+    height:64px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #d4a04a;
+    border-radius:50%;
+    background:rgba(212,160,74,.05);
+    overflow:hidden;
+}
+
+.srv-thumb img{
+    width:36px;
+    height:36px;
+    object-fit:contain;
+}
+
+    .srv-meta {
+      flex: 1;
+    }
+
+    .srv-cat {
+      color: #d4a04a;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .srv-name {
+      font-family: 'Playfair Display', serif;
+      color: #1a1208;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .srv-arrow {
+      color: #b0a090;
+      font-size: 18px;
+      transition: transform 0.3s, color 0.3s;
+      margin-left: auto;
+    }
+
+    .srv-item.active .srv-arrow {
+      transform: rotate(90deg);
+      color: #d4a04a;
+    }
+
+    .srv-short {
+      color: #8a7a66;
+      font-size: 12px;
+      margin-top: 3px;
+      max-width: 360px;
+    }
+
+    .srv-panel {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition:
+        max-height .8s ease,
+        opacity .4s ease;
+    }
+
+    .srv-item.active .srv-panel {
+      max-height: 2000px;
+      opacity: 1;
+    }
+
+    .panel-inner {
+      padding: 0 2rem 2rem 4rem;
+    }
+
+    .panel-desc {
+      color: #4a3e2e;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+      max-width: 520px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      margin-bottom: 1.4rem;
+    }
+
+    .gal-card {
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .gal-card:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gal-img {
+      width: 100%;
+      padding-top: 80%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gal-card:first-child .gal-img {
+      padding-top: 100%;
+    }
+
+    .gal-img-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gal-img-inner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+
+    .gal-img-inner {
+      overflow: hidden;
+    }
+
+    .gal-img-inner img {
+      display: block;
+      image-rendering: auto;
+      backface-visibility: hidden;
+    }
+
+    /* Zoom léger seulement au survol */
+
+    .gal-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.1) 55%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gal-card:hover .gal-overlay,
+    .gal-card:first-child .gal-overlay {
+      opacity: 1;
+    }
+
+    .gal-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.8rem;
+      transform: translateY(6px);
+      transition: transform 0.3s;
+    }
+
+    .gal-info {
+      transform: translateY(0);
+    }
+
+    .gal-card:hover {
+      transform: none;
+    }
+
+    .gal-card:first-child .gal-info {
+      transform: translateY(0);
+    }
+
+    .gal-label {
+      color: #d4a04a;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .gal-caption {
+      color: #fff;
+      font-size: 11px;
+      font-family: 'Playfair Display', serif;
+      margin-top: 2px;
+    }
+
+    .panel-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #d4a04a;
+      color: #d4a04a;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+    }
+
+    .next-peek {
+      padding: 1rem 2rem 1rem 4rem;
+      background: #090909;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0.5;
+    }
+
+    .next-peek-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #444;
+      flex-shrink: 0;
+    }
+
+    .next-peek-label {
+      color: #555;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .next-peek-name {
+      color: #666;
+      font-size: 14px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* ==========================================================================
+   STYLISATION DU FOOTER (AUTONOME ET CORRIGÉE)
+   ========================================================================== */
+
+    /* Import de la police si elle n'est pas présente */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600&display=swap');
+
+    .footer {
+      background-color: #111111;
+      /* Équivalent à --dark-bg */
+      color: #ffffff;
+      padding: 80px 0 30px 0;
+      font-family: 'Poppins', sans-serif;
+      margin-top: 80px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      /* Équivalent à --gold avec opacité */
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 80px;
+    }
+
+    .footer-brand .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .footer-brand .footer-logo span {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 6px;
+      color: #d4af37;
+      /* Équivalent à --gold */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      margin-top: 5px;
+    }
+
+    .footer-desc {
+      color: #a0a0a0;
+      /* Équivalent à --text-gray */
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      max-width: 400px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-socials .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+    }
+
+    .footer-socials .social-link:hover {
+      background: #d4af37;
+      /* Équivalent à --gold */
+      color: #111111;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .footer-links-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .footer-links-col h3 {
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+      font-size: 18px;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .footer-links-col h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 30px;
+      height: 1px;
+      background-color: #d4af37;
+      /* Équivalent à --gold */
+    }
+
+    .footer-links-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links-col ul li {
+      margin-bottom: 15px;
+    }
+
+    .footer-links-col ul li a {
+      color: #a0a0a0;
+      /* Équivalent à --text-gray */
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      display: inline-block;
+    }
+
+    .footer-links-col ul li a:hover,
+    .footer-links-col ul li a.active {
+      color: #d4af37;
+      /* Équivalent à --gold */
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 60px auto 0 auto;
+      padding: 30px 30px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      color: #666666;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    /* Responsiveness pour le Footer */
+    @media (max-width: 768px) {
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .footer-links-group {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="page-header">
+      <span class="page-eyebrow">African Queen Empire</span>
+      <h1 class="page-title">Our Services</h1>
+    </div>
+
+    <div class="services-list" id="srvList">
+      <div class="srv-line"></div>
+      <!-- PEEK 1 -->
+      <div class="srv-item" data-index="1">
+        <div class="srv-trigger">
+          <div class="srv-dot"></div>
+          <div class="srv-thumb">
+              <img src="{% static 'images/interior-design.png' %}" alt="">
+          </div>
+          <div class="srv-meta">
+            <h2 class="srv-name">Interior Decoration</h2>
+            <p class="srv-short">Espaces decores avec un style africain</p>
+          </div>
+          <span class="srv-arrow">›</span>
+        </div>
+        <div class="srv-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">Chaque pièce devient un voyage. Nous concevons des intérieurs qui marient les motifs
+              africains, les matières naturelles et la lumière pour créer des atmosphères uniques où le
+              luxe.</p>
+            <div class="gallery">
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#0a2a18,#0f5a30);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/ID3.jpg' %}" alt="">
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                      <rect x="8" y="16" width="40" height="30" rx="2" stroke="#d4a04a" stroke-width="1.5"
+                        fill="rgba(212,160,74,0.15)" />
+                      <path d="M16 16V12C16 9.8 17.8 8 20 8H36C38.2 8 40 9.8 40 12V16" stroke="#d4a04a"
+                        stroke-width="1.5" fill="none" />
+                    </svg>
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Salon</span>
+                    <p class="gal-caption">..avec des tableaux..</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#1a0a2a,#3d1a5a);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/ID6.jpg' %}" alt="">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <path d="M4 28V12L16 4L28 12V28H4Z" stroke="#d4a04a" stroke-width="1.2"
+                        fill="rgba(212,160,74,0.1)" />
+                    </svg>
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label"></span>
+                    <p class="gal-caption">...lumineux dans les espaces</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#200800,#4d1800);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/ID4.jpg' %}" alt="">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <circle cx="16" cy="16" r="8" stroke="#d4a04a" stroke-width="1.2" fill="none" />
+                      <path d="M8 16H24M16 8V24" stroke="#d4a04a" stroke-width="1.2" />
+                    </svg>
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Luminaire</span>
+                    <p class="gal-caption">Suspensions en rotin tressé à la main</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#0a1820,#1a3a50);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/ID13.jpg' %}" alt="">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <rect x="4" y="4" width="10" height="24" rx="1" stroke="#d4a04a" stroke-width="1.2"
+                        fill="rgba(212,160,74,0.1)" />
+                      <rect x="18" y="4" width="10" height="14" rx="1" stroke="#d4a04a" stroke-width="1.2"
+                        fill="rgba(212,160,74,0.1)" />
+                    </svg>
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label"></span>
+                    <p class="gal-caption">..avec des motifs traditionnels..</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-cta">Explorer l'espace →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE 2 -->
+      <div class="srv-item" data-index="0">
+        <div class="srv-trigger">
+          <div class="srv-dot"></div>
+          <div class="srv-thumb">
+              <img src="{% static 'images/hand-made.png' %}" alt="">
+          </div>
+          <div class="srv-meta">
+            <h2 class="srv-name">Handmade Creativity</h2>
+            <p class="srv-short">Pièces uniques nées du savoir-faire ancestral</p>
+          </div>
+          <span class="srv-arrow">›</span>
+        </div>
+        <div class="srv-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">De l'argile, du fil, du cuir et des perles — chaque objet raconte une histoire
+              transmise de génération en génération. Nos artisans façonnent des créations qui portent l'âme du continent
+              tout en dialoguant avec l'esthétique contemporaine.</p>
+            <div class="gallery">
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#3d1a00,#7a3c00);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/HC3.jpg' %}" alt="">
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                      <path d="M8 48L18 8L28 30L38 18L48 48H8Z" stroke="#d4a04a" stroke-width="1.5"
+                        fill="rgba(212,160,74,0.2)" />
+                      <circle cx="28" cy="30" r="4" fill="#d4a04a" />
+                    </svg>
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Sculpture</span>
+                    <p class="gal-caption">...des styles ancestral sur les objets modernes.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#2a0a0a,#6b2020);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/HC2.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Textile</span>
+                    <p class="gal-caption">..des bijoux..</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#0a2a1a,#1a5a30);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/HC9.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Bijoux</span>
+                    <p class="gal-caption">..des tableaux decoratives..</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#1a1a0a,#3d3d00);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/HC10.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Poterie</span>
+                    <p class="gal-caption">Céramiques aux symboles adinkra</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-cta">Découvrir l'artisanat →</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- SERVICE 3 -->
+      <div class="srv-item" data-index="2">
+        <div class="srv-trigger">
+          <div class="srv-dot"></div>
+          <div class="srv-thumb" >
+            <img src="{% static 'images/latte-art.png' %}" alt="">
+          </div>
+          <div class="srv-meta">
+            <h2 class="srv-name">Coffee Lifestyle</h2>
+            <p class="srv-short">Le café africain érigé en rituel de vie</p>
+          </div>
+          <span class="srv-arrow">›</span>
+        </div>
+        <div class="srv-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">
+                Coffee Lifestyle celebrates the art of gathering. Enjoy premium African
+                coffee, fresh meals, homemade pastries, and carefully selected refreshments
+                served in an atmosphere inspired by African warmth, creativity, and
+                hospitality.
+            </p>
+            <div class="gallery">
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#2d1200,#5c2600);">
+                  <div class="gal-img-inner">
+                    <img
+                      src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=900"
+                      alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Coffee</span>
+                    <p class="gal-caption"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#1a0a00,#3d2200);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/CL4.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label"></span>
+                    <p class="gal-caption">..salades de fruits..</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#0a180a,#1a3a1a);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/CL2.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label"></span>
+                    <p class="gal-caption">...pizza..</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#200a20,#4d1a4d);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/CL1.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label"></span>
+                    <p class="gal-caption">..plats complets</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-cta">Voir le menu →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE 4 -->
+      <div class="srv-item" data-index="3">
+        <div class="srv-trigger">
+          <div class="srv-dot"></div>
+          <div class="srv-thumb">
+            <img src="{% static 'images/shirt.png' %}" alt="">
+          </div>
+          <div class="srv-meta">
+            <h2 class="srv-name">Fashion Products</h2>
+            <p class="srv-short">Mode africaine contemporaine comme manifeste</p>
+          </div>
+          <span class="srv-arrow">›</span>
+        </div>
+        <div class="srv-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">Des pagnes aux coupes architecturales, nos collections fusionnent le savoir-faire des
+              tisserands africains avec une vision de mode globale. Chaque pièce est une déclaration — porter African
+              Queen Empire, c'est affirmer son héritage.</p>
+            <div class="gallery">
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#2a0a2a,#6b1a6b);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/FP1.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Couture</span>
+                    <p class="gal-caption">Robes à imprimés bogolan contemporains</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#1a0800,#4d2400);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/FP2.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Accessoires</span>
+                    <p class="gal-caption">Sacs en raphia tressé et cuir naturel</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#0a1a0a,#1a4a20);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/FP3.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Prêt-à-porter</span>
+                    <p class="gal-caption">Collections capsule saison 2025</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#0a0a20,#1a1a5a);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/FP4.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Sur mesure</span>
+                    <p class="gal-caption">Tenues de cérémonie personnalisées</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-cta">Voir la collection →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE 5 -->
+      <div class="srv-item" data-index="4">
+        <div class="srv-trigger">
+          <div class="srv-dot"></div>
+          <div class="srv-thumb">
+            <img src="{% static 'images/woman.png' %}" alt="">
+          </div>
+          <div class="srv-meta">
+            <h2 class="srv-name">Natural Hair Elegance</h2>
+            <p class="srv-short">La texture naturelle célébrée en couronne</p>
+          </div>
+          <span class="srv-arrow"></span>
+        </div>
+        <div class="srv-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">Tresses, locks, twists, afros — chaque texture est une couronne à porter avec fierté.
+              Nos spécialistes en capillologie naturelle africaine proposent soins, styling et formations pour célébrer
+              et préserver la beauté authentique des cheveux naturels.</p>
+            <div class="gallery">
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#0a1a2a,#1a4060);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/NH1.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Styling</span>
+                    <p class="gal-caption">Box braids ornées de fils dorés</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#1a0a00,#3d2200);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/NH2.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Soins</span>
+                    <p class="gal-caption">Masques à l'huile de karité pur</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#0a200a,#1a5020);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/NH3.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Formation</span>
+                    <p class="gal-caption">Ateliers tressage et capillologie naturelle</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gal-card">
+                <div class="gal-img" style="background:linear-gradient(135deg,#200a20,#501050);">
+                  <div class="gal-img-inner">
+                    <img src="{% static 'images/NH4.jpg' %}" alt="">
+                  </div>
+                  <div class="gal-overlay"></div>
+                  <div class="gal-info"><span class="gal-label">Produits</span>
+                    <p class="gal-caption">Gamme naturelle aux plantes africaines</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-cta">Prendre rendez-vous →</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2 class="footer-logo">AFRICAN QUEEN<span>EMPIRE</span></h2>
+        <p class="footer-desc">L'excellence de l'artisanat africain et du luxe contemporain réunis en une seule
+          empreinte.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-links-col">
+          <h3>Navigation</h3>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="service.html" class="active">Nos Services</a></li>
+            <li><a href="#about">Notre Histoire</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h3>Univers</h3>
+          <ul>
+            <li><a href="#">Haute Couture</a></li>
+            <li><a href="#">Décoration d'Intérieur</a></li>
+            <li><a href="#">Prestations Luxe</a></li>
+            <li><a href="#">Événementiel</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AFRICAN QUEEN EMPIRE. Tous droits réservés. Créé par DonJosue3.</p>
+    </div>
+  </footer>
+  <script>
+    const items = [...document.querySelectorAll('.srv-item')];
+
+    // Fonction simplifiée : on active ou désactive un item précis
+    function setItemActive(item, isActive) {
+      item.classList.toggle('active', isActive);
+    }
+
+    // On s'assure que le tout premier est ouvert au départ
+    setItemActive(items[0], true);
+
+    // Configuration de l'Observer
+    const observerOptions = {
+      root: null,
+      // La ligne de déclenchement est ajustée près du haut de l'écran (25% du haut)
+      rootMargin: '-25% 0px -75% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const index = parseInt(entry.target.getAttribute('data-index'), 10);
+
+        if (entry.isIntersecting) {
+          // Si l'élément entre dans la zone en défilant vers le bas, on l'ouvre
+          setItemActive(entry.target, true);
+        } else {
+          // IMPORTANT : On ne referme l'élément QUE si on remonte la page.
+          // Si l'élément sort par le HAUT de l'écran (boundingClientRect.top < zone de déclenchement),
+          // cela signifie qu'on descend plus bas : on le LAISSE ouvert.
+          if (entry.boundingClientRect.top > 0) {
+            // L'élément sort par le bas (l'utilisateur remonte la page) : on peut le refermer
+            // (Optionnel : vous pouvez commenter la ligne ci-dessous si vous voulez qu'ils restent toujours ouverts)
+            setItemActive(entry.target, false);
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Activer l'observation sur tous les services
+    items.forEach(item => observer.observe(item));
+  </script>
+</body>
+
+</html>
