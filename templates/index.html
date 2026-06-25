@@ -148,7 +148,7 @@
         <div class="svc-item active" data-idx="0">
           <div class="svc-dot-wrap"><div class="svc-dot"></div></div>
           <div class="svc-body">
-            <div class="svc-img-wrap"><img src="https://images.pexels.com/photos/20164064/pexels-photo-20164064.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Craft"><div class="svc-img-overlay"></div></div>
+            <div class="svc-img-wrap"><img src="{% static 'images/HC1.jpg' %}" alt="Craft"><div class="svc-img-overlay"></div></div>
             <div class="svc-text"><span class="svc-num">01</span><span class="svc-eyebrow">Artisanat · African Craft</span><h3 class="svc-title">Handmade Creativity</h3><div class="svc-deco"></div><p class="svc-desc">Authentic African handmade creations crafted with passion, precision, and cultural identity.</p><a href="https://africanqueenempire.com/services/handmade" class="svc-link">Discover <i class="ti ti-arrow-right"></i></a></div>
             <div class="svc-peek"><div class="svc-peek-num">02 ·</div><div class="svc-peek-title">Interior Decoration</div></div>
           </div>
@@ -156,14 +156,14 @@
         <div class="svc-item" data-idx="1">
           <div class="svc-dot-wrap"><div class="svc-dot"></div></div>
           <div class="svc-body">
-            <div class="svc-img-wrap"><img src="https://images.pexels.com/photos/6775667/pexels-photo-6775667.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Decor"><div class="svc-img-overlay"></div></div>
+            <div class="svc-img-wrap"><img src="{% static 'images/ID13.jpg' %}" alt="Decor"><div class="svc-img-overlay"></div></div>
             <div class="svc-text"><span class="svc-num">02</span><span class="svc-eyebrow">Décoration · Interior Design</span><h3 class="svc-title">Interior Decoration</h3><div class="svc-deco"></div><p class="svc-desc">Elegant interiors inspired by African warmth, luxury, textures, and natural aesthetics.</p><a href="https://africanqueenempire.com/services/interior" class="svc-link">Discover <i class="ti ti-arrow-right"></i></a></div>
             <div class="svc-peek"><div class="svc-peek-num">03 ·</div><div class="svc-peek-title">Café Lifestyle</div></div>
           </div>
         </div>
         <div class="svc-item" data-idx="2">
           <div class="svc-dot-wrap"><div class="svc-dot"></div></div>
-          <div class="svc-body">
+          <div class="svc-body"> 
             <div class="svc-img-wrap"><img src="https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Cafe"><div class="svc-img-overlay"></div></div>
             <div class="svc-text"><span class="svc-num">03</span><span class="svc-eyebrow">Lifestyle · Coffee Culture</span><h3 class="svc-title">Café Lifestyle</h3><div class="svc-deco"></div><p class="svc-desc">Immersive coffee experiences blending African hospitality, atmosphere, and premium taste.</p><a href="https://africanqueenempire.com/services/cafe" class="svc-link">Discover <i class="ti ti-arrow-right"></i></a></div>
             <div class="svc-peek"><div class="svc-peek-num">04 ·</div><div class="svc-peek-title">Fashion Products</div></div>
@@ -172,7 +172,7 @@
         <div class="svc-item" data-idx="3">
           <div class="svc-dot-wrap"><div class="svc-dot"></div></div>
           <div class="svc-body">
-            <div class="svc-img-wrap"><img src="{% static 'images/fashion.jpg' %}" alt="Fashion"><div class="svc-img-overlay"></div></div>
+            <div class="svc-img-wrap"><img src="{% static 'images/FP5.jpg' %}" alt="Fashion"><div class="svc-img-overlay"></div></div>
             <div class="svc-text"><span class="svc-num">04</span><span class="svc-eyebrow">Mode · African Fashion</span><h3 class="svc-title">Fashion Products</h3><div class="svc-deco"></div><p class="svc-desc">Premium African fashion products designed with bold identity and contemporary luxury.</p><a href="https://africanqueenempire.com/services/fashion" class="svc-link">Discover <i class="ti ti-arrow-right"></i></a></div>
             <div class="svc-peek"><div class="svc-peek-num">05 ·</div><div class="svc-peek-title">Natural Hair Elegance</div></div>
           </div>
@@ -180,7 +180,7 @@
         <div class="svc-item" data-idx="4">
           <div class="svc-dot-wrap"><div class="svc-dot"></div></div>
           <div class="svc-body">
-            <div class="svc-img-wrap"><img src="https://images.pexels.com/photos/3992876/pexels-photo-3992876.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Hair"><div class="svc-img-overlay"></div></div>
+            <div class="svc-img-wrap"><img src="{% static 'images/NH1.jpg' %}" alt="Hair"><div class="svc-img-overlay"></div></div>
             <div class="svc-text"><span class="svc-num">05</span><span class="svc-eyebrow">Beauté · Hair Care</span><h3 class="svc-title">Natural Hair Elegance</h3><div class="svc-deco"></div><p class="svc-desc">Celebrating the beauty and power of natural African hair — premium care products.</p><a href="https://africanqueenempire.com/services/hair" class="svc-link">Discover <i class="ti ti-arrow-right"></i></a></div>
             <div class="svc-peek"></div>
           </div>
@@ -253,10 +253,10 @@
 
   <script>
     const slides = [
-      { image:"{% static 'images/handmade.jpg' %}", title:"Handmade Creativity", text:"Unique African crafts made with passion and precision." },
+      { image:"{% static 'images/HC1.jpg' %}", title:"Handmade Creativity", text:"Unique African crafts made with passion and precision." },
       { image:"{% static 'images/ID13.jpg' %}", title:"Interior Decoration", text:"Bring warmth and African elegance into your living spaces." },
       { image:"https://images.pexels.com/photos/162886/coffee-glass-beverage-coffee-mug-162886.jpeg?auto=compress&cs=tinysrgb&w=1600", title:"Coffee Lifestyle", text:"Relax and enjoy an authentic cultural coffee experience." },
-      { image:"https://images.pexels.com/photos/20167932/pexels-photo-20167932.jpeg?auto=compress&cs=tinysrgb&w=1600", title:"Fashion Products", text:"Bold designs and premium African textiles just for you." },
+      { image:"{% static 'images/FP5.jpg' %}", title:"Fashion Products", text:"Bold designs and premium African textiles just for you." },
       { image:"{% static 'images/NH3.jpg' %}", title:"Natural Hair Elegance", text:"Celebrate the beauty of your natural African hair." }
     ];
     const bgSlider = document.getElementById("bgSlider"), innerSlider = document.getElementById("innerSlider"), sliderTitle = document.getElementById("sliderTitle"), sliderText = document.getElementById("sliderText"), ac = document.getElementById("animatedContent");
