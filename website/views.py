@@ -5,3 +5,6 @@ def home(request):
 
 def services(request):
     return render(request, "service.html")
+
+def menu(request):
+    return render(request, "menu.html")
