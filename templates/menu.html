@@ -14,7 +14,7 @@
     }
 
     body {
-      background-color: #87614f;
+      background-color: #a46746f4;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -86,6 +86,30 @@
       width: 180px;
     }
 
+    .image7 {
+      position: absolute;
+      top: -50px;
+      left: -20px;
+      height: 210px;
+      width: 180px;
+    }
+
+    .image8 {
+      position: absolute;
+      bottom: -50px;
+      right: -20px;
+      height: 180px;
+      width: 180px;
+    }
+
+    .image9 {
+      position: absolute;
+      bottom: -50px;
+      left: -20px;
+      height: 200px;
+      width: 200px;
+    }
+
     .menucinq,
     .menuquatre,
     .menuthree,
@@ -94,7 +118,7 @@
       width: calc(100% - 40px);
       height: calc(100% - 40px);
       margin: 20px;
-      background-color: #E5D3C5;
+      background-color: #ebcdb6;
       display: flex;
       flex-direction: row;
       border-radius: 20px;
@@ -102,7 +126,26 @@
       position: relative;
     }
 
-    .deuxdeux {
+    .neuf .deuxdeux {
+      width: 100%;
+      height: max-content;
+      background-color: #E5D3C5;
+      border: #333 solid 1px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quatre .deuxdeux {
+      width: 100%;
+      height: max-content;
+      background-color: #E5D3C5;
+      border: #333 solid 1px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sept .deuxdeux {
+      margin-top: 140px;
       width: 100%;
       height: max-content;
       background-color: #E5D3C5;
@@ -117,7 +160,7 @@
     }
 
     h1 {
-      color: #816c61;
+      color: #392f29;
       font-size: 20px;
       margin-top: 0px;
       text-transform: uppercase;
@@ -220,28 +263,32 @@
       display: flex;
       flex-direction: column;
     }
-    .huit{
+
+    .huit {
       height: max-content;
       width: 100%;
       margin-left: 40px;
       display: flex;
       flex-direction: column;
     }
-    .neuf{
+
+    .neuf {
       height: max-content;
       width: 50%;
       display: flex;
       flex-direction: column;
     }
-    .dix{
+
+    .dix {
       height: max-content;
       width: 50%;
       margin-left: 40px;
       display: flex;
       flex-direction: column;
     }
+
     .titre {
-      background-color: #5b5656;
+      background-color: #141313;
       height: max-content;
       width: 100%;
       display: flex;
@@ -249,6 +296,7 @@
     }
 
     .titre h1 {
+      color:#c9c1c1;
       padding: 5px;
     }
 
@@ -632,12 +680,12 @@
     </div>
     <div class="cardquatre">
       <div class="menuquatre">
+        <img class="image7" src="{% static 'images/p2.png' %}" alt="">
         <div class="sept">
           <div class="deuxdeux">
             <div class="titre">
               <h1>Patisseries</h1>
             </div>
-            <div class="line1"></div>
             <p>
             <div class="menu-item">
               <div class="nom">
@@ -679,23 +727,10 @@
                 <div class="point"></div>Crepes au Chocolat (4)
               </div><span class="prix">20.000 fbu</span>
             </div>
-            <div class="menu-item">
-              <div class="nom">
-                <div class="point"></div>Mini Beignets(40)
-              </div><span class="prix">15.000 fbu</span>
-            </div>
-            <div class="menu-item">
-              <div class="nom">
-                <div class="point"></div>Galettes Nature(4)
-              </div><span class="prix">15.000 fbu</span>
-            </div>
-            <div class="menu-item">
-              <div class="nom">
-                <div class="point"></div>Galettes au Chocolat (4)
-              </div><span class="prix">20.000 fbu</span>
-            </div>
+
           </div>
         </div>
+        <img class="image8" src="{% static 'images/p1.png' %}" alt="">
         <div class="huit">
           <h1>Patisseries </h1>
           <div class="line1"></div>
@@ -749,6 +784,21 @@
               <div class="point"></div>Croissants
             </div><span class="prix">8.000 fbu</span>
           </div>
+          <div class="menu-item">
+            <div class="nom">
+              <div class="point"></div>Mini Beignets(40)
+            </div><span class="prix">15.000 fbu</span>
+          </div>
+          <div class="menu-item">
+            <div class="nom">
+              <div class="point"></div>Galettes Nature(4)
+            </div><span class="prix">15.000 fbu</span>
+          </div>
+          <div class="menu-item">
+            <div class="nom">
+              <div class="point"></div>Galettes au Chocolat (4)
+            </div><span class="prix">20.000 fbu</span>
+          </div>
         </div>
         </p>
       </div>
@@ -758,66 +808,70 @@
     <div class="cardcinq">
       <div class="menucinq">
         <div class="neuf">
-          <h1>Portions</h1>
-          <div class="line1"></div>
-          <p>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Frites
-            </div><span class="prix">12.000fbu</span>
+          <div class="deuxdeux">
+            <div class="titre">
+              <h1>Portions</h1>
+            </div>
+            <p>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Frites
+              </div><span class="prix">12.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Riz
+              </div><span class="prix">10.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Salade
+              </div><span class="prix">10.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Emincés de boeuf
+              </div><span class="prix">12.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Haricots
+              </div><span class="prix">5.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Legumes
+              </div><span class="prix">5.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Avocats
+              </div><span class="prix">5.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Tranches de pain
+              </div><span class="prix">5.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Mayonaise
+              </div><span class="prix">3.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Ketchup
+              </div><span class="prix">3.000fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Citron
+              </div><span class="prix">2.000fbu</span>
+            </div>
+            </p>
           </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Riz
-            </div><span class="prix">10.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Salade
-            </div><span class="prix">10.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Emincés de boeuf
-            </div><span class="prix">12.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Haricots
-            </div><span class="prix">5.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Legumes
-            </div><span class="prix">5.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Avocats
-            </div><span class="prix">5.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Tranches de pain
-            </div><span class="prix">5.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Mayonaise
-            </div><span class="prix">3.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Ketchup
-            </div><span class="prix">3.000fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Citron
-            </div><span class="prix">2.000fbu</span>
-          </div>
-          </p>
         </div>
+        <img class="image9" src="{% static 'images/r1.png' %}" alt="">
         <div class="dix">
           <h1>Pizza</h1>
           <div class="line1"></div>
