@@ -8,3 +8,6 @@ def services(request):
 
 def menu(request):
     return render(request, "menu.html")
+
+def shop(request):
+    return render(request, "shop.html")
