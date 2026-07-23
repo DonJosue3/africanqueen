@@ -28,8 +28,14 @@
       overflow-x: hidden;
     }
 
+    .logo img {
+      width: 130px;
+      height: 100px;
+      display: block;
+    }
+
     .page-header {
-      padding: 2.5rem 2rem 1.5rem;
+      padding: 0.2rem 2rem 1.5rem;
       border-bottom: 1px solid #e5ddd0;
       background-color: #ffffff;
     }
@@ -101,24 +107,24 @@
       transform: translateY(-50%) scale(1.3);
     }
 
-    .srv-thumb{
-    width:64px;
-    height:64px;
-    flex-shrink:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:1px solid #d4a04a;
-    border-radius:50%;
-    background:rgba(212,160,74,.05);
-    overflow:hidden;
-}
+    .srv-thumb {
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #d4a04a;
+      border-radius: 50%;
+      background: rgba(212, 160, 74, .05);
+      overflow: hidden;
+    }
 
-.srv-thumb img{
-    width:36px;
-    height:36px;
-    object-fit:contain;
-}
+    .srv-thumb img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
 
     .srv-meta {
       flex: 1;
@@ -503,7 +509,7 @@
 <body>
   <div class="page">
     <div class="page-header">
-      <span class="page-eyebrow">African Queen Empire</span>
+      <div class="logo"><img src="{% static 'images/logo.png' %}" alt="Logo"></div>
       <h1 class="page-title">Our Services</h1>
     </div>
 
@@ -514,7 +520,7 @@
         <div class="srv-trigger">
           <div class="srv-dot"></div>
           <div class="srv-thumb">
-              <img src="{% static 'images/interior-design.png' %}" alt="">
+            <img src="{% static 'images/interior-design.png' %}" alt="">
           </div>
           <div class="srv-meta">
             <h2 class="srv-name">Interior Decoration</h2>
@@ -603,7 +609,7 @@
         <div class="srv-trigger">
           <div class="srv-dot"></div>
           <div class="srv-thumb">
-              <img src="{% static 'images/hand-made.png' %}" alt="">
+            <img src="{% static 'images/hand-made.png' %}" alt="">
           </div>
           <div class="srv-meta">
             <h2 class="srv-name">Handmade Creativity</h2>
@@ -677,7 +683,7 @@
       <div class="srv-item" data-index="2">
         <div class="srv-trigger">
           <div class="srv-dot"></div>
-          <div class="srv-thumb" >
+          <div class="srv-thumb">
             <img src="{% static 'images/latte-art.png' %}" alt="">
           </div>
           <div class="srv-meta">
@@ -689,10 +695,10 @@
         <div class="srv-panel">
           <div class="panel-inner">
             <p class="panel-desc">
-                Coffee Lifestyle celebrates the art of gathering. Enjoy premium African
-                coffee, fresh meals, homemade pastries, and carefully selected refreshments
-                served in an atmosphere inspired by African warmth, creativity, and
-                hospitality.
+              Coffee Lifestyle celebrates the art of gathering. Enjoy premium African
+              coffee, fresh meals, homemade pastries, and carefully selected refreshments
+              served in an atmosphere inspired by African warmth, creativity, and
+              hospitality.
             </p>
             <div class="gallery">
               <div class="gal-card">
@@ -743,7 +749,7 @@
               </div>
             </div>
             <a href="{% url 'menu' %}">
-            <div class="panel-cta">Voir le menu →</div>
+              <div class="panel-cta">Voir le menu →</div>
             </a>
           </div>
         </div>
