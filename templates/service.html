@@ -540,7 +540,7 @@
 
     .footer-bottom {
       max-width: 1200px;
-      margin: 60px auto 0 auto;
+      margin: 0px auto 0 auto;
       padding: 30px 30px 0 30px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       text-align: center;
@@ -563,6 +563,150 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
+    .site-footer {
+      width: 100%;
+      background: #06060a;
+      padding: 60px 6vw 0
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid #111
+    }
+
+    .footer-brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: #d4a04a;
+      margin-bottom: 14px
+    }
+
+    .footer-brand p {
+      font-size: .8rem;
+      color: #555;
+      line-height: 1.8;
+      max-width: 240px;
+      margin-bottom: 20px
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px
+    }
+
+    .footer-social {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #1e1e1e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 1rem;
+      transition: border-color .2s, color .2s;
+      text-decoration: none
+    }
+
+    .footer-social:hover {
+      border-color: #d4a04a;
+      color: #d4a04a
+    }
+
+    .footer-col h4 {
+      font-size: .65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 16px;
+      font-weight: 500
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: .8rem;
+      color: #666;
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: color .2s
+    }
+
+    .footer-col a:hover {
+      color: #d4a04a
+    }
+
+    .footer-newsletter-input {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px
+    }
+
+    .footer-newsletter-input input {
+      flex: 1;
+      background: #0f0e12;
+      border: 1px solid #1e1a14;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: .75rem;
+      color: #fff;
+      outline: none;
+      font-family: 'Poppins', sans-serif
+    }
+
+    .footer-newsletter-input input::placeholder {
+      color: #333;
+    }
+
+    .footer-newsletter-input input:focus {
+      border-color: #d4a04a
+    }
+
+    .footer-newsletter-input button {
+      background: #d4a04a;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: .7rem;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-top: 1px solid #0d0d0d
+    }
+
+    .footer-bottom span {
+      font-size: .7rem;
+      color: #333;
+      letter-spacing: 1px
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px
+    }
+
+    .footer-bottom-links a {
+      font-size: .7rem;
+      color: #333;
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .footer-bottom-links a:hover {
+      color: #d4a04a
+    }
   </style>
 </head>
 
@@ -573,8 +717,8 @@
       <div class="main-nav-container">
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'menu' %}">Menu</a>
-        <a href="{% url 'shop' %}" >Shop</a>
-        <a href="{% url 'services'}" class="active">Services</a>
+        <a href="{% url 'shop' %}">Shop</a>
+        <a href="{% url 'services' %}" class="active">Services</a>
       </div>
     </div>
 
@@ -962,46 +1106,51 @@
         </div>
       </div>
     </div>
-
   </div>
-  </div>
-  <footer class="footer">
-    <div class="footer-container">
+  <footer class="site-footer">
+    <div class="footer-top">
       <div class="footer-brand">
-        <h2 class="footer-logo">AFRICAN QUEEN<span>EMPIRE</span></h2>
-        <p class="footer-desc">L'excellence de l'artisanat africain et du luxe contemporain réunis en une seule
-          empreinte.</p>
+        <div class="footer-brand-logo">African Queen Empire</div>
+        <p>Une marque de lifestyle africaine qui célèbre la beauté, la créativité et l'hospitalité.</p>
         <div class="footer-socials">
-          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+
+          <a href="https://www.facebook.com/profile.php?id=61586875303123" class="footer-social" target="_blank"
+            rel="noopener noreferrer" aria-label="Facebook">
+            <i class="ti ti-brand-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/africanqueenempire1/" class="footer-social" target="_blank"
+            rel="noopener noreferrer" aria-label="Instagram">
+            <i class="ti ti-brand-instagram"></i>
+          </a>
+          <a href="https://www.tiktok.com/@africanqueenempire?_r=1&_t=ZM-91zcYTQsv5X&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnIXvDgFunqvECkfp84ajEpfC24c6m3VC8wp2kkil23cmI1JZsRfo4XuovMJY_aem_m_NbdTqgu6Eh9gLqoYqH4g"
+            class="footer-social" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <i class="ti ti-brand-tiktok"></i>
+          </a>
+          <a href="https://www.threads.com/@africanqueenempire1?xmt=AQG0RdDXgb2WW82eY8gIYhg-riUjku5CD4bEd4MSJA8b_KA"
+            class="footer-social" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+            <i class="ti ti-brand-threads"></i>
+          </a>
+
         </div>
       </div>
-
-      <div class="footer-links-group">
-        <div class="footer-links-col">
-          <h3>Navigation</h3>
-          <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="service.html" class="active">Nos Services</a></li>
-            <li><a href="#about">Notre Histoire</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-links-col">
-          <h3>Univers</h3>
-          <ul>
-            <li><a href="#">Haute Couture</a></li>
-            <li><a href="#">Décoration d'Intérieur</a></li>
-            <li><a href="#">Prestations Luxe</a></li>
-            <li><a href="#">Événementiel</a></li>
-          </ul>
-        </div>
+      <div class="footer-col">
+        <h4>Navigation</h4><a href="#">Accueil</a><a href="#">Services</a><a href="#">Shop</a><a href="#">À propos</a><a
+          href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4><a href="#">Handmade Creativity</a><a href="#">Interior Decoration</a><a href="#">Café
+          Lifestyle</a><a href="#">Fashion Products</a><a href="#">Natural Hair Elegance</a>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p style="font-size:.8rem;color:#555;line-height:1.7;margin-bottom:0">Recevez nos nouveautés et offres
+          exclusives.</p>
+        <div class="footer-newsletter-input"><input type="email" placeholder="Votre email…"><button>OK</button></div>
+        <div style="margin-top:16px;font-size:.75rem;color:#444">Bujumbura, Burundi<br>info@africanqueenempire.com</div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 AFRICAN QUEEN EMPIRE. Tous droits réservés. Créé par DonJosue3.</p>
+    <div class="footer-bottom"><span>© 2025 AFRICAN QUEEN EMPIRE · TOUS DROITS RÉSERVÉS</span>
+
     </div>
   </footer>
   <script>

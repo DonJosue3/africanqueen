@@ -6,6 +6,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+
   <style>
     * {
       margin: 0;
@@ -60,7 +62,7 @@
       position: relative;
       padding: 80px 6vw 0px;
       text-align: center;
-      background: #fff6e0;
+      background: #ebcdb6a8;
       border-bottom: 1px solid rgba(212, 160, 74, .15)
     }
 
@@ -93,7 +95,6 @@
     .cardun,
     .carddeux {
       width: calc(50vw - 60px);
-      /* Note : Les espaces autour du '-' sont obligatoires en CSS pour calc() */
       height: calc(100vh - 60px);
       background-color: rgb(250, 250, 250);
       margin: 30px;
@@ -401,6 +402,305 @@
       display: flex;
       flex-direction: row;
     }
+
+    .footer {
+      background-color: #111111;
+      /* Équivalent à --dark-bg */
+      color: #ffffff;
+      padding: 80px 0 30px 0;
+      font-family: 'Poppins', sans-serif;
+      margin-top: 80px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      /* Équivalent à --gold avec opacité */
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 80px;
+    }
+
+    .footer-brand .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .footer-brand .footer-logo span {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 6px;
+      color: #d4af37;
+      /* Équivalent à --gold */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      margin-top: 5px;
+    }
+
+    .footer-desc {
+      color: #a0a0a0;
+      /* Équivalent à --text-gray */
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      max-width: 400px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-socials .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+    }
+
+    .footer-socials .social-link:hover {
+      background: #d4af37;
+      /* Équivalent à --gold */
+      color: #111111;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .footer-links-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .footer-links-col h3 {
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+      font-size: 18px;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .footer-links-col h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 30px;
+      height: 1px;
+      background-color: #d4af37;
+      /* Équivalent à --gold */
+    }
+
+    .footer-links-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links-col ul li {
+      margin-bottom: 15px;
+    }
+
+    .footer-links-col ul li a {
+      color: #a0a0a0;
+      /* Équivalent à --text-gray */
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      display: inline-block;
+    }
+
+    .footer-links-col ul li a:hover,
+    .footer-links-col ul li a.active {
+      color: #d4af37;
+      /* Équivalent à --gold */
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0px auto 0 auto;
+      padding: 30px 30px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      color: #666666;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    /* Responsiveness pour le Footer */
+    @media (max-width: 768px) {
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .footer-links-group {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .site-footer {
+      width: 100%;
+      background: #06060a;
+      padding: 60px 6vw 0
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid #111
+    }
+
+    .footer-brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: #d4a04a;
+      margin-bottom: 14px
+    }
+
+    .footer-brand p {
+      font-size: .8rem;
+      color: #555;
+      line-height: 1.8;
+      max-width: 240px;
+      margin-bottom: 20px
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px
+    }
+
+    .footer-social {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #1e1e1e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 1rem;
+      transition: border-color .2s, color .2s;
+      text-decoration: none
+    }
+
+    .footer-social:hover {
+      border-color: #d4a04a;
+      color: #d4a04a
+    }
+
+    .footer-col h4 {
+      font-size: .65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 16px;
+      font-weight: 500
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: .8rem;
+      color: #666;
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: color .2s
+    }
+
+    .footer-col a:hover {
+      color: #d4a04a
+    }
+
+    .footer-newsletter-input {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px
+    }
+
+    .footer-newsletter-input input {
+      flex: 1;
+      background: #0f0e12;
+      border: 1px solid #1e1a14;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: .75rem;
+      color: #fff;
+      outline: none;
+      font-family: 'Poppins', sans-serif
+    }
+
+    .footer-newsletter-input input::placeholder {
+      color: #333;
+    }
+
+    .footer-newsletter-input input:focus {
+      border-color: #d4a04a
+    }
+
+    .footer-newsletter-input button {
+      background: #d4a04a;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: .7rem;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-top: 1px solid #0d0d0d
+    }
+
+    .footer-bottom span {
+      font-size: .7rem;
+      color: #333;
+      letter-spacing: 1px
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px
+    }
+
+    .footer-bottom-links a {
+      font-size: .7rem;
+      color: #333;
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .footer-bottom-links a:hover {
+      color: #d4a04a
+    }
   </style>
 </head>
 
@@ -410,9 +710,9 @@
       <div class="logo"><img src="{% static 'images/logo.png' %}" alt="Logo"></div>
       <div class="main-nav-container">
         <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'menu' %}"class="active">Menu</a>
+        <a href="{% url 'menu' %}" class="active">Menu</a>
         <a href="{% url 'shop' %}">Shop</a>
-        <a href="{% url 'services'}" >Services</a>
+        <a href="{% url 'services' %}">Services</a>
       </div>
     </div>
 
@@ -1022,6 +1322,52 @@
       </div>
     </div>
   </div>
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">African Queen Empire</div>
+        <p>Une marque de lifestyle africaine qui célèbre la beauté, la créativité et l'hospitalité.</p>
+        <div class="footer-socials">
+
+          <a href="https://www.facebook.com/profile.php?id=61586875303123" class="footer-social" target="_blank"
+            rel="noopener noreferrer" aria-label="Facebook">
+            <i class="ti ti-brand-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/africanqueenempire1/" class="footer-social" target="_blank"
+            rel="noopener noreferrer" aria-label="Instagram">
+            <i class="ti ti-brand-instagram"></i>
+          </a>
+          <a href="https://www.tiktok.com/@africanqueenempire?_r=1&_t=ZM-91zcYTQsv5X&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnIXvDgFunqvECkfp84ajEpfC24c6m3VC8wp2kkil23cmI1JZsRfo4XuovMJY_aem_m_NbdTqgu6Eh9gLqoYqH4g"
+            class="footer-social" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <i class="ti ti-brand-tiktok"></i>
+          </a>
+          <a href="https://www.threads.com/@africanqueenempire1?xmt=AQG0RdDXgb2WW82eY8gIYhg-riUjku5CD4bEd4MSJA8b_KA"
+            class="footer-social" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+            <i class="ti ti-brand-threads"></i>
+          </a>
+
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4><a href="#">Accueil</a><a href="#">Services</a><a href="#">Shop</a><a href="#">À propos</a><a
+          href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4><a href="#">Handmade Creativity</a><a href="#">Interior Decoration</a><a href="#">Café
+          Lifestyle</a><a href="#">Fashion Products</a><a href="#">Natural Hair Elegance</a>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p style="font-size:.8rem;color:#555;line-height:1.7;margin-bottom:0">Recevez nos nouveautés et offres
+          exclusives.</p>
+        <div class="footer-newsletter-input"><input type="email" placeholder="Votre email…"><button>OK</button></div>
+        <div style="margin-top:16px;font-size:.75rem;color:#444">Bujumbura, Burundi<br>info@africanqueenempire.com</div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 AFRICAN QUEEN EMPIRE · TOUS DROITS RÉSERVÉS</span>
+
+    </div>
+  </footer>
 </body>
 
 </html>
