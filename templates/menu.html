@@ -21,6 +21,72 @@
       font-family: sans-serif;
     }
 
+    .header-bar {
+      position: absolute;
+      top: 0;
+      inset: 0 60px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      padding: 10px 0
+    }
+
+    .logo img {
+      width: 130px;
+      height: 100px;
+      display: block;
+    }
+
+    .main-nav-container a {
+      color: #000000;
+      text-decoration: none;
+      margin-left: 35px;
+      font-size: .85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: .75;
+      transition: opacity .25s, color .25s
+    }
+
+    .main-nav-container a:hover,
+    .main-nav-container a.active {
+      color: #ffea00;
+      opacity: 1
+    }
+
+    .m-hero {
+      position: relative;
+      padding: 80px 6vw 0px;
+      text-align: center;
+      background: #fff6e0;
+      border-bottom: 1px solid rgba(212, 160, 74, .15)
+    }
+
+    .m-hero .eyebrow {
+      color: #d4a04a;
+      font-size: .75rem;
+      letter-spacing: 5px;
+      text-transform: uppercase
+    }
+
+    .m-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 3.6rem;
+      color: #000000;
+    }
+
+    .m-hero p {
+      color: #c9bfa8;
+      max-width: 480px;
+      margin: 14px auto 0;
+      line-height: 1.8;
+      font-size: .95rem
+    }
+
     .cardcinq,
     .cardquatre,
     .cardtrois,
@@ -68,17 +134,17 @@
     }
 
     .image4 {
-      position : absolute;
+      position: absolute;
       filter: drop-shadow(10px 10px 10px rgb(81, 80, 80));
-      top:-30px;
+      top: -30px;
       right: -35px;
       width: 200px;
       height: 200px;
     }
 
     .image5 {
-      position:absolute; 
-      filter: drop-shadow(10px 10px 10px rgb(81, 80, 80));     
+      position: absolute;
+      filter: drop-shadow(10px 10px 10px rgb(81, 80, 80));
       bottom: -10px;
       left: -30px;
       height: 170px;
@@ -120,7 +186,8 @@
       height: 200px;
       width: 200px;
     }
-    .image10{
+
+    .image10 {
       position: absolute;
       filter: drop-shadow(10px 10px 10px rgb(81, 80, 80));
       top: -40px;
@@ -128,6 +195,7 @@
       height: 200px;
       width: 200px;
     }
+
     .menucinq,
     .menuquatre,
     .menuthree,
@@ -254,7 +322,7 @@
     .quatre {
       height: 100%;
       width: 50%;
-      margin-top:120px;
+      margin-top: 120px;
       margin-left: 40px;
       display: flex;
       flex-direction: column;
@@ -302,7 +370,7 @@
       height: max-content;
       width: 50%;
       margin-left: 40px;
-      margin-top:100px;
+      margin-top: 100px;
       display: flex;
       flex-direction: column;
     }
@@ -316,7 +384,7 @@
     }
 
     .titre h1 {
-      color:#c9c1c1;
+      color: #c9c1c1;
       padding: 5px;
     }
 
@@ -337,6 +405,21 @@
 </head>
 
 <body>
+  <div class="head">
+    <div class="header-bar">
+      <div class="logo"><img src="{% static 'images/logo.png' %}" alt="Logo"></div>
+      <div class="main-nav-container">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'menu' %}"class="active">Menu</a>
+        <a href="{% url 'shop' %}">Shop</a>
+        <a href="{% url 'services'}" >Services</a>
+      </div>
+    </div>
+
+    <section class="m-hero">
+      <h1>Our Menu</h1>
+    </section>
+  </div>
   <!-- PREMIÈRE CARTE : PLATS DU JOUR -->
   <div class="premier">
     <div class="cardun">
@@ -507,7 +590,7 @@
               <div class="point"></div>Sandwich au thon
             </div><span class="prix">30.000 fbu</span>
           </div>
-          
+
           <div class="menu-item">
             <div class="nom">
               <div class="point"></div>Shawarma au boeuf
@@ -553,15 +636,15 @@
               </div><span class="prix">15.000 fbu</span>
             </div>
             <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Hamburger
-            </div><span class="prix">25.000 fbu</span>
-          </div>
-          <div class="menu-item">
-            <div class="nom">
-              <div class="point"></div>Cheeseburger
-            </div><span class="prix">30.000 fbu</span>
-          </div>
+              <div class="nom">
+                <div class="point"></div>Hamburger
+              </div><span class="prix">25.000 fbu</span>
+            </div>
+            <div class="menu-item">
+              <div class="nom">
+                <div class="point"></div>Cheeseburger
+              </div><span class="prix">30.000 fbu</span>
+            </div>
             <div class="menu-item">
               <div class="nom">
                 <div class="point"></div>Chapati salade
