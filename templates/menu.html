@@ -701,6 +701,30 @@
     .footer-bottom-links a:hover {
       color: #d4a04a
     }
+    
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      color: #666;
+      font-size: .82rem;
+      line-height: 1.6;
+    }
+
+    .footer-contact-item i {
+      color: #d4a04a;
+      font-size: 20px;
+      min-width: 20px;
+    }
+
+    .footer-contact-item span {
+      transition: .3s;
+    }
+
+    .footer-contact-item:hover span {
+      color: #d4a04a;
+    }
   </style>
 </head>
 
@@ -1349,19 +1373,34 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Navigation</h4><a href="{% url 'home' %}">Accueil</a><a href="{% url 'services' %}">Services</a><a href="{% url 'shop' %}">Shop</a><a href="{% url 'menu' %}">Menu</a>
-          
+        <h4>Navigation</h4><a href="{% url 'home' %}">Accueil</a><a href="{% url 'services' %}">Services</a><a
+          href="{% url 'shop' %}">Shop</a><a href="{% url 'menu' %}">Menu</a>
+
       </div>
       <div class="footer-col">
-        <h4>Services</h4><a href="{% url 'services' %}">Handmade Creativity</a><a href="{% url 'services' %}">Interior Decoration</a><a href="{% url 'services' %}">Coffee
-          Lifestyle</a><a href="{% url 'services' %}">Fashion Products</a><a href="{% url 'services' %}">Natural Hair Elegance</a>
+        <h4>Services</h4><a href="{% url 'services' %}">Handmade Creativity</a><a href="{% url 'services' %}">Interior
+          Decoration</a><a href="{% url 'services' %}">Coffee
+          Lifestyle</a><a href="{% url 'services' %}">Fashion Products</a><a href="{% url 'services' %}">Natural Hair
+          Elegance</a>
       </div>
       <div class="footer-col">
-        <h4>Newsletter</h4>
-        <p style="font-size:.8rem;color:#555;line-height:1.7;margin-bottom:0">Recevez nos nouveautés et offres
-          exclusives.</p>
-        <div class="footer-newsletter-input"><input type="email" placeholder="Votre email…"><button>OK</button></div>
-        <div style="margin-top:16px;font-size:.75rem;color:#444">Bujumbura, Burundi<br>africanqueenempirebuja@gmail.com</div>
+        <h4>Contacts</h4>
+        <div class="footer-contact-item">
+          <i class="ti ti-map-pin"></i>
+          <span>Bujumbura, Burundi</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="ti ti-phone"></i>
+          <span>
+            <br>+257 61 205 463
+            <br>+257 68 634 836
+            <br>+257 61 258 758
+          </span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="ti ti-mail"></i>
+          <span>africanqueenempirebuja@gmail.com</span>
+        </div>
       </div>
     </div>
     <div class="footer-bottom"><span>© 2025 AFRICAN QUEEN EMPIRE · TOUS DROITS RÉSERVÉS</span>
