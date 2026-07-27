@@ -737,7 +737,7 @@
           <img src="{% static 'images/interior-design.png' %}" alt="">
         </div>
         <div class="srv-meta">
-          <h2 class="srv-name">Interior Decoration</h2>
+          <h2 class="srv-name">I.Interior Decoration</h2>
           <p class="srv-short">Espaces decores avec un style africain</p>
         </div>
         <span class="srv-arrow">›</span>
@@ -826,7 +826,7 @@
           <img src="{% static 'images/hand-made.png' %}" alt="">
         </div>
         <div class="srv-meta">
-          <h2 class="srv-name">Handmade Creativity</h2>
+          <h2 class="srv-name">II.Handmade Creativity</h2>
           <p class="srv-short">Pièces uniques nées du savoir-faire ancestral</p>
         </div>
         <span class="srv-arrow">›</span>
@@ -901,7 +901,7 @@
           <img src="{% static 'images/latte-art.png' %}" alt="">
         </div>
         <div class="srv-meta">
-          <h2 class="srv-name">Coffee Lifestyle</h2>
+          <h2 class="srv-name">III.Coffee Lifestyle</h2>
           <p class="srv-short">Le café africain érigé en rituel de vie</p>
         </div>
         <span class="srv-arrow">›</span>
@@ -977,7 +977,7 @@
           <img src="{% static 'images/shirt.png' %}" alt="">
         </div>
         <div class="srv-meta">
-          <h2 class="srv-name">Fashion Products</h2>
+          <h2 class="srv-name">IV.Fashion Products</h2>
           <p class="srv-short">Mode africaine contemporaine comme manifeste</p>
         </div>
         <span class="srv-arrow">›</span>
@@ -1046,7 +1046,7 @@
           <img src="{% static 'images/woman.png' %}" alt="">
         </div>
         <div class="srv-meta">
-          <h2 class="srv-name">Natural Hair Elegance</h2>
+          <h2 class="srv-name">V.Natural Hair Elegance</h2>
           <p class="srv-short">La texture naturelle célébrée en couronne</p>
         </div>
         <span class="srv-arrow">›</span>
@@ -1166,10 +1166,8 @@
 
     // Configuration de l'Observer
     const observerOptions = {
-      root: null,
-      // La ligne de déclenchement est ajustée près du haut de l'écran (25% du haut)
-      rootMargin: '-25% 0px -75% 0px',
-      threshold: 0
+
+      threshold: 0.35
     };
 
     const observer = new IntersectionObserver((entries) => {
