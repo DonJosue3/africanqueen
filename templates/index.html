@@ -452,10 +452,9 @@
     }
 
     .mv-section {
-      position: relative;
-      z-index: 4;
+      align-items: center;
       width: 100%;
-      padding: 60px 5vw 50px;
+      padding: 60px  50px;
       background: rgba(5, 5, 5, .97);
       border-top: 1px solid rgba(255, 255, 255, .05);
       display: flex;
@@ -1201,6 +1200,12 @@
     }
 
     @media(max-width:992px) {
+      .logo img {
+      width: 140px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .4))
+    }
       .header-bar {
         padding: 0 40px
       }
@@ -1255,78 +1260,6 @@
       .footer-top {
         grid-template-columns: 1fr 1fr;
         gap: 30px
-      }
-    }
-
-    @media(max-width:768px) {
-      .header-bar {
-        top: 25px;
-        flex-direction: column;
-        gap: 15px;
-        padding: 0 20px
-      }
-
-      .main-nav-container a {
-        margin: 0 8px;
-        font-size: .8rem
-      }
-
-      .content {
-        width: calc(100% - 40px)
-      }
-
-      .content h1 {
-        font-size: 2rem
-      }
-
-      .about-values-strip {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .cards-deck {
-        width: 200px;
-        height: 300px
-      }
-      .card-item {
-        width: 160px;
-        height: 230px;
-        border-width: 4px
-      }
-      .mv-card-body {
-        padding: 26px
-      }
-      .mv-card-body .about-title-h2 {
-        font-size: 1.9rem
-      }
-      .svc-item.active .svc-img-wrap {
-        width: 100%
-      }
-
-      .svc-body {
-        flex-wrap: wrap
-      }
-
-      .svc-title {
-        font-size: 2rem
-      }
-
-      .shop-header h2 {
-        font-size: 2.8rem
-      }
-
-      .shop-scroll-wrap {
-        padding: 0 4vw 20px
-      }
-
-      .footer-top {
-        grid-template-columns: 1fr;
-        gap: 28px
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center
       }
     }
 
@@ -1390,19 +1323,108 @@
     .footer-contact-item:hover span {
       color: #d4a04a;
     }
+
+    .menu-toggle {
+      display: none;
+      width: 45px;
+      height: 45px;
+      border: none;
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 28px;
+      transition: .3s;
+    }
+
+    .menu-toggle:hover {
+      background: #ffea00;
+      color: #000;
+    }
+
+    @media(max-width:768px) {
+      .logo img {
+      margin-left:-50px;
+      width: 20vw;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .4))
+    }
+      .header-bar {
+        margin-top:10px;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-toggle {
+        margin-right:-40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .main-nav-container {
+
+        position: absolute;
+        top: 90px;
+        right: 20px;
+        width: 240px;
+        display: flex;
+        flex-direction: column;
+        background: rgba(10, 10, 10, .98);
+        border-radius: 18px;
+        padding: 20px;
+        gap: 18px;
+        transform: scale(.9);
+        opacity: 0;
+        visibility: hidden;
+        transition: .35s;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, .6);
+
+      }
+
+      .main-nav-container.open {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+      }
+
+      .main-nav-container a {
+        margin: 0;
+        width: 100%;
+        text-align: left;
+      }
+      .front-page{
+       
+      }
+
+    }
   </style>
 </head>
 
 <body>
-
   <section class="front-page">
     <div class="bg-slider" id="bgSlider"></div>
     <div class="front-page-overlay"></div>
     <div class="content-box">
       <div class="header-bar">
-        <div class="logo"><img src="{% static 'images/aqelogo.png' %}" alt="Logo"></div>
-        <div class="main-nav-container"><a href="{% url 'services' %}">Services</a><a href="{% url 'menu' %}">Menu</a><a
-            href="{% url 'shop' %}">Shop</a><a href="#">Contact</a></div>
+
+        <div class="logo">
+          <img src="{% static 'images/aqelogo.png' %}" alt="Logo">
+        </div>
+
+        <button id="menuToggle" class="menu-toggle">
+          <i class="ti ti-menu-2"></i>
+        </button>
+
+        <div id="mainNav" class="main-nav-container">
+          <a href="{% url 'services' %}">Services</a>
+          <a href="{% url 'menu' %}">Menu</a>
+          <a href="{% url 'shop' %}">Shop</a>
+          <a href="#">Contact</a>
+        </div>
+
       </div>
       <div class="inner-slider" id="innerSlider"></div>
       <div class="content right animate-right" id="animatedContent">
@@ -1413,8 +1435,7 @@
       </div>
     </div>
   </section>
-
-  <section class="about-section">
+<section class="about-section">
     <div class="content-box about-card-unrolled">
       <div class="about-block-wrap white-version">
         <!--div class="about-hero-content-split">
@@ -1771,6 +1792,29 @@
   </footer>
 
   <script>
+    const menuButton = document.getElementById("menuToggle");
+    const nav = document.getElementById("mainNav");
+
+    menuButton.addEventListener("click", function (e) {
+      e.stopPropagation();
+      nav.classList.toggle("open");
+    });
+
+    document.addEventListener("click", function (e) {
+      if (
+        !nav.contains(e.target) &&
+        !menuButton.contains(e.target)
+      ) {
+        nav.classList.remove("open");
+      }
+    });
+
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+      });
+
+    });
     const slides = [
       { image: "{% static 'images/HC1.jpg' %}", title: "Handmade Creativity", text: "Unique African crafts made with passion and precision." },
       { image: "{% static 'images/ID13.jpg' %}", title: "Interior Decoration", text: "Bring warmth and African elegance into your living spaces." },
